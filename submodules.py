@@ -77,15 +77,3 @@ def input_money_w_params(prompt:str, code:str, moneyparam:int):
     return amount
 
 
-
-# dict1 = [{"nama":"anggito", "umur":19},
-#          {"nama":"ariiq","umur":19}]
-
-# dict2 = [{"nama":"rakha", "umur":19},
-#          {"nama":"dea","umur":19}]
-
-# open_write_all_csv("dompet.csv",dict1)
-# open_append_csv("dompet.csv", dict2)
-
-# fk = open_read_csv("dompet.csv")
-# print(fk)
