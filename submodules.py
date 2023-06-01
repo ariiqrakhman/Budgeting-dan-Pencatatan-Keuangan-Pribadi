@@ -33,7 +33,7 @@ def input_normal(prompt:str):
             print(er)
     return ans.lower()
 
-def input_of_options(prompt:str, ls_options:list, errormsg= "Input Tidak Valid!"):
+def input_of_options(prompt:str, ls_options:list, errormsg = "Input Tidak Valid!"):
     while True:
         try:
             ans = input(prompt)
@@ -70,10 +70,9 @@ def input_money_w_params(prompt:str, code:str, moneyparam:int):
         try:
             amount = input(prompt)
             assert amount >= 0, "Uang tidak negatif!"
-            assert amount - moneyparam >= 0 if code == "0" else True
+            assert amount - moneyparam >= 0 if code == "0" else True, "Uang tidak cukup!"
             break
         except AssertionError as er:
             print(er)
     return amount
-
 
