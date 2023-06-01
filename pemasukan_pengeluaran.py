@@ -35,7 +35,7 @@ elif final == "t" :
     if transbaru == "y" :
         pilih_dompet()
         if transbaru== "t":
-            print ("end")
+            print("end")
     
 
 
