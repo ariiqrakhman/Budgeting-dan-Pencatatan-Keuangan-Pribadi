@@ -40,6 +40,6 @@ def tulis_dompet(namadompet, code:str, nominal:int):
     
     submodules.open_write_all_csv("dompet.csv",list_dompet, header)
 
-# pilih_dompet()
-
-# tulis_dompet(pilih_dompet(),"1",10000)
+if __name__ == "__main__":
+#     pilih_dompet()
+    tulis_dompet(pilih_dompet(),"1",10000)
