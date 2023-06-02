@@ -28,7 +28,7 @@ else :
 final = submodules.input_of_yatidak("Finalisasi pembuatan transaksi ?(y/t)")
 print(final)
 if final == "y" :
-    toadd = [[ tanggal, kode, tipe, dompet, nominal ]]
+    toadd = [[ tanggal , kode , tipe , dompet , nominal ]]
     submodules.open_append_csv("sejarah_transaksi.csv", toadd)
 elif final == "t" :
     transbaru = submodules.input_of_yatidak("buat transaksi baru ?(y/t)")
