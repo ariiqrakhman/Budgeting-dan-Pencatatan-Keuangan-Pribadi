@@ -18,12 +18,11 @@ def open_write_all_csv(filename, ds, hd):
         tulis.writerow(hd)
         tulis.writerows(ds)
 
-
 def open_append_csv(filename, ds):
     filepath = path.join(getcwd(),"files",filename)
     with open(filepath, "a", newline="") as f:
-            tulis = writer(f)
-            tulis.writerows(ds)
+        tulis = writer(f)
+        tulis.writerows(ds)
 
 def open_append2first_csv(filename, ds):
     header, content = open_read_csv(filename)
@@ -31,10 +30,10 @@ def open_append2first_csv(filename, ds):
     content.insert(0, toinsert)
     open_write_all_csv(filename, content, header)
 
-def sort_csv_by_hd(filename, value:str, reverse_cond:bool = False):
+def sort_csv_by_hd(filename, sortby:str, reverse_cond:bool = False):
     header, content = open_read_csv(filename)
-    index = header.index(value)
-    if value != "nominal":
+    index = header.index(sortby)
+    if sortby != "nominal":
         sortkey = lambda ls : ls[index]
     else:
         sortkey = lambda ls : int(ls[index])
@@ -85,10 +84,12 @@ def input_money(prompt:str):
 def input_money_w_params(prompt:str, code:str, moneyparam:int):
     while True:
         try:
-            amount = input(prompt+"\n")
+            amount = int(input(prompt+"\n"))
             assert amount >= 0, "Uang tidak negatif!"
             assert amount - moneyparam >= 0 if code == "0" else True, "Uang tidak cukup!"
             break
+        except ValueError:
+            print("Masukkan uang dengan benar")
         except AssertionError as er:
             print(er)
     return amount
@@ -101,10 +102,10 @@ def ch_color_style(value, color:str="", style:str=""):
         "underline" : "\033[4m",
         ""        :        "",
         "black" : "\033[30m",
-        "red" : "\033[31m",
+        "red" : "\033[38;5;196m",
         "orange" : "\033[38;2;255;165;55m",
-        "yellow" : "\033[33m",
-        "green" : "\033[32m",
+        "yellow" : "\033[38;2;255;255;0m",
+        "green" : "\033[38;5;46m",
         "blue" : "\033[34m",
         "magenta" : "\033[35m",
         "purple" : "\033[38;5;165m",
