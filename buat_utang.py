@@ -34,4 +34,3 @@ def buat_utang():
                 break
             elif buat_lagi == "y":
                 continue
-            
