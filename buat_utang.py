@@ -9,29 +9,35 @@ def rekap_utang(nama:str, dompet:int, nominal:int):
 
     submodules.open_append_csv("utang.csv", toadd)
 
-# def buat_utang():
-
 if __name__ == "__main__":
     rekap_utang("utang Dea", "umum", 100000)
     
 def buat_utang():
     while True:
-        dompet = input_of_options("Pilih dompet (A/B): ", ["a", "b"])
-        nama_utang = input_normal("Masukkan nama utang: ")
-        nominal_utang = input_money("Masukkan nominal utang: ")
-        finalisasi = input_of_yatidak("Apakah Anda ingin finalisasi pembuatan utang? (y/t): ")
+        # pilih dompet untuk mencatat utang
+        dompet, nominal_dompet = pilih_dompet()
         
+        # meminta pengguna memasukkan nama utang
+        nama_utang = submodules.input_normal("Masukkan nama utang: ")
+        # meminta pengguna memasukkan nominal utang
+        nominal_utang = submodules.input_money("Masukkan nominal utang: ")
+        # memberikan pilihan kepada pengguna apakah ingin menyelesaikan pembuatan utang atau tidak
+        finalisasi = submodules.input_of_yatidak("Apakah Anda ingin finalisasi pembuatan utang? (y/t): ")
+        
+        # jika penggunana ingin menyelesaikan pembuatan utang
         if finalisasi == "y":
-            header, content = open_read_csv("rekap_utang.csv")
-            content.append([dompet, nama_utang, nominal_utang])
-            open_write_all_csv("rekap_utang.csv", content, header)
-            print("Utang berhasil dibuat!")
+            # menambahkan data utang ke file CSV
+            rekap_utang(nama_utang, dompet, nominal_dompet)
+            # keluar dari loop while
             break
+        
+        # jika pengguna tidak ingin menyelesaikan pembuatan utang    
         elif finalisasi == "t":
-            buat_lagi = input_of_yatidak("Apakah Anda ingin membuat utang baru? (y/t): ")
+            
+            # jika pengguna tidak ingin membuat utang baru
+            # meminta pengguna memilih apakah ingin membuat utang baru atau tidak
+            buat_lagi = submodules.input_of_yatidak("Apakah Anda ingin membuat utang baru? (y/t): ")
             if buat_lagi == "t":
-                print("Selesai")
+                # keluar dari loop while
                 break
-            elif buat_lagi == "y":
-                continue
             
