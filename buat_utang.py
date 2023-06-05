@@ -35,9 +35,9 @@ def buat_utang():
         # jika pengguna tidak ingin menyelesaikan pembuatan utang    
         elif finalisasi == "t":
             
-            # jika pengguna tidak ingin membuat utang baru
             # meminta pengguna memilih apakah ingin membuat utang baru atau tidak
             buat_lagi = submodules.input_of_yatidak("Apakah Anda ingin membuat utang baru? (y/t): ")
+            # jika pengguna tidak ingin membuat utang baru
             if buat_lagi == "t":
                 # keluar dari loop while
                 break
