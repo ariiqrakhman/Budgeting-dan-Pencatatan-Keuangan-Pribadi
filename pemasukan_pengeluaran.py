@@ -32,8 +32,7 @@ def pemasukan_pengeluaran():
         #finalisasi pembuatan transaksi
         final = submodules.input_of_yatidak("Finalisasi pembuatan transaksi ?(y/t)")
         if final == "y" :
-            toadd = [[ tanggal, kode, tipe, dompet, nominal ]]
-            submodules.open_append_csv("sejarah_transaksi.csv", toadd)
+            rekap_pemasukan_pengeluaran(inputpp, pilihtipe, pilih, nominal)
         elif final == "t" :
             transbaru = submodules.input_of_yatidak("buat transaksi baru ?(y/t)")
             if transbaru == "t":
@@ -41,7 +40,6 @@ def pemasukan_pengeluaran():
 
 if __name__ == "__main__":
     rekap_pemasukan_pengeluaran("0", "dll", "umum", 40000)
-
     
 
 
