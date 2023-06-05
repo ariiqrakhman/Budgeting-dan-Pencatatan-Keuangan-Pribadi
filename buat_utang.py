@@ -24,7 +24,7 @@ def buat_utang():
         # jika penggunana ingin menyelesaikan pembuatan utang
         if finalisasi == "y":
             # menambahkan data utang ke file CSV
-            rekap_utang(nama_utang, dompet, nominal_dompet)
+            rekap_utang(nama_utang, dompet, nominal_utang)
             # keluar dari loop while
             break
         
@@ -38,4 +38,5 @@ def buat_utang():
                 # keluar dari loop while
                 break
 
-# if __name__ == "__main__":
+if __name__ == "__main__":
+    buat_utang()

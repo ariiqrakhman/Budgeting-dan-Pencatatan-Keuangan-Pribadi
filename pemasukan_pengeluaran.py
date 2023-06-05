@@ -33,13 +33,14 @@ def pemasukan_pengeluaran():
         final = submodules.input_of_yatidak("Finalisasi pembuatan transaksi ?(y/t)")
         if final == "y" :
             rekap_pemasukan_pengeluaran(inputpp, pilihtipe, pilih, nominal)
+            break
         elif final == "t" :
             transbaru = submodules.input_of_yatidak("buat transaksi baru ?(y/t)")
             if transbaru == "t":
                 break
 
 if __name__ == "__main__":
-    rekap_pemasukan_pengeluaran("0", "dll", "umum", 40000)
+    pemasukan_pengeluaran()
     
 
 
