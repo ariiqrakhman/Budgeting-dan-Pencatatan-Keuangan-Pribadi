@@ -1,4 +1,5 @@
 import submodules
+<<<<<<< HEAD
 from pilih_dompet import pilih_dompet, tulis_dompet
 from pemasukan_pengeluaran import rekap_pemasukan_pengeluaran
 
@@ -33,3 +34,7 @@ bayar_utang()
 
 # if __name__ == "__main__":
 #     bayar_utang("Utang Rakha","umum", 12000)
+=======
+from pilih_dompet import pilih_dompet
+from pemasukan_pengeluaran import rekap_pemasukan_pengeluaran
+>>>>>>> 20a55338e2b95eb06af0211380a70c2cf43e192f
