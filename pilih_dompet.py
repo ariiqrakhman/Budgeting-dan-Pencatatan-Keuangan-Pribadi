@@ -50,16 +50,3 @@ def tulis_dompet(namadompet, code:str, nominal:int):
     
     # Tulis perubahan pada file dompet kembali
     submodules.open_write_all_csv("dompet.csv",list_dompet, header)
-
-if __name__ == "__main__":
-<<<<<<< HEAD
-<<<<<<< HEAD
-    pilih_dompet()
-=======
-#     pilih_dompet()
-    tulis_dompet(pilih_dompet(),"1",10000)
->>>>>>> 20a55338e2b95eb06af0211380a70c2cf43e192f
-=======
-    # pilih_dompet()
-    # tulis_dompet(pilih_dompet(),"1",10000)
->>>>>>> a0d406bd427a2aeaf863bce99f47c43298058096
