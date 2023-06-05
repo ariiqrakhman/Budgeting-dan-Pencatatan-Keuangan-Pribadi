@@ -4,7 +4,7 @@ from pemasukan_pengeluaran import rekap_pemasukan_pengeluaran
 
 def bayar_utang(nama:str, dompet:int, nominal:int):
     # Membuka file CSV dan mendapatkan header dan daftar utang
-    header, list_utang = submodules.open_write_all_csv
+    header, list_utang = submodules.open_read_csv("utang.csv")
 
     # Memeriksa apakah ada utang dalam daftar
     if len(list_utang) >= 1:
