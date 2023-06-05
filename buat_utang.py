@@ -8,10 +8,6 @@ def rekap_utang(nama:str, dompet:int, nominal:int):
     toadd = [[ nama, nominal ]]
 
     submodules.open_append_csv("utang.csv", toadd)
-
-if __name__ == "__main__":
-    <<<<<<< HEAD
-    rekap_utang("utang Dea", "umum", 100000)
     
 def buat_utang():
     while True:
@@ -41,7 +37,4 @@ def buat_utang():
             if buat_lagi == "t":
                 # keluar dari loop while
                 break
-            
-=======
-    rekap_utang("utang Dea", "umum", 100000)
->>>>>>> a0d406bd427a2aeaf863bce99f47c43298058096
+
