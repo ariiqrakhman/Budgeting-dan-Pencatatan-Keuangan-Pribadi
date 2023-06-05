@@ -1,9 +1,9 @@
 tgl,kode,tipe,dompet,nominal
-2023/05/31,1,uang saku,umum,300000
-2023/05/31,0,dll,sub1,20000
 2023/06/01,1,dll,sub2,2000
 2023/06/01,0,dll,umum,40000
 2023/06/01,1,utang,umum,100000
 2023/06/01,0,dll,umum,40000
 2023/06/01,0,dll,umum,40000
 2023/06/01,0,dll,umum,40000
+2023/05/31,1,uang saku,umum,300000
+2023/05/31,0,dll,sub1,20000
