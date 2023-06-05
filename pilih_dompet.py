@@ -17,7 +17,7 @@ def pilih_dompet():
         # Apabila nama dompet terpilih, kembalikan dompet terpilih dan tutup subprogram
         if pilih != "buat":
             indeks = opsi.index(pilih)
-            return list_dompet[indeks][0]
+            return list_dompet[indeks][0], int(list_dompet[indeks][1])
         
         # Apabila input buat,
         # Masukkan nama dompet
@@ -52,5 +52,4 @@ def tulis_dompet(namadompet, code:str, nominal:int):
     submodules.open_write_all_csv("dompet.csv",list_dompet, header)
 
 if __name__ == "__main__":
-    # pilih_dompet()
-    # tulis_dompet(pilih_dompet(),"1",10000)
+    pilih_dompet()

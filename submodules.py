@@ -86,7 +86,7 @@ def input_money_w_params(prompt:str, code:str, moneyparam:int):
         try:
             amount = int(input(prompt+"\n"))
             assert amount >= 0, "Uang tidak negatif!"
-            assert amount - moneyparam >= 0 if code == "0" else True, "Uang tidak cukup!"
+            assert moneyparam - amount >= 0 if code == "0" else True, "Uang tidak cukup!"
             break
         except ValueError:
             print("Masukkan uang dengan benar")
@@ -115,8 +115,9 @@ def ch_color_style(value, color:str="", style:str=""):
     }
     return f"{fmt[style]}{fmt[color]}{value}{fmt['reset']}"
 
-def display_table(values:list, header:list):
-    print(tabulate(values, headers= header, tablefmt="rst", stralign= "center"))
+def display_table_centered(values:list, header:list, spaces:int=60):
+    table = tabulate(values, headers= header, tablefmt="rst", stralign= "center")
+    
+    lines = table.split("\n")
 
-
-
+    return "\n".join([lines[i].center(spaces) for i in range(len(lines))])
