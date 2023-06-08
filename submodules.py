@@ -86,7 +86,7 @@ def input_money_w_params(prompt:str, code:str, moneyparam:int):
         try:
             amount = int(input(prompt+"\n"))
             assert amount >= 0, "Uang tidak negatif!"
-            assert amount - moneyparam >= 0 if code == "0" else True, "Uang tidak cukup!"
+            assert moneyparam - amount >= 0 if code == "0" else True, "Uang tidak cukup!"
             break
         except ValueError:
             print("Masukkan uang dengan benar")

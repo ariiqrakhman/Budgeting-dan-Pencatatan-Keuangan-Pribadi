@@ -6,7 +6,8 @@ def analisis_keuangan():
     hd_dp, ls_dp = submodules.open_read_csv("dompet.csv")
     hd_tr, ls_tr = submodules.open_read_csv("sejarah_transaksi.csv")
 
-    # Urusan dompet
+    # Pertambahan/pengurangan dompet
+    hd_dp.append("Perubahan")
     for i in range(len(ls_tr)):
         kode = ls_tr[i][1]
         dompet = ls_tr[i][3]
@@ -48,8 +49,15 @@ def analisis_keuangan():
     for j in range(len(ls_ex)):
         amount = ls_ex[j][1]
         (ls_ex[j]).append(round(amount/total_pendapatan*100,2))
+    
+    # Tampilkan update dompet
+    submodules.display_table(ls_dp, hd_dp)
 
-analisis_keuangan()
+    # Tampilkan pengeluaran berdasarkan tipe
+    submodules.display_table(ls_ex, hd_ex)
+
+if __name__ == "__main__":
+    analisis_keuangan()
 
             
 
