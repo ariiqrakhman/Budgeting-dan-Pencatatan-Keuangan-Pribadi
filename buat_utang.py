@@ -1,9 +1,9 @@
 import submodules
-from pilih_dompet import pilih_dompet, tulis_dompet
+from pilih_dompet import pilih_dompet
 from pemasukan_pengeluaran import rekap_pemasukan_pengeluaran
 
 def rekap_utang(nama:str, dompet:int, nominal:int):
-    rekap_pemasukan_pengeluaran("1", "utang", dompet, nominal)
+    rekap_pemasukan_pengeluaran(1, "utang", dompet, nominal)
 
     toadd = [[ nama, nominal ]]
 
@@ -16,12 +16,23 @@ def buat_utang():
         
         # meminta pengguna memasukkan nama utang
         nama_utang = submodules.input_normal("Masukkan nama utang: ")
+
         # meminta pengguna memasukkan nominal utang
         nominal_utang = submodules.input_money("Masukkan nominal utang: ")
-        # memberikan pilihan kepada pengguna apakah ingin menyelesaikan pembuatan utang atau tidak
-        finalisasi = submodules.input_of_yatidak("Apakah Anda ingin finalisasi pembuatan utang? (y/t): ")
+
+        # Konfirmasi buat utang
+        dis_nom = f"Rp{nominal_utang:,}"
+
+        print(f'''Konfirmasi pembuatan transaksi:
+Transaksi {submodules.ch_color_style("pemasukan","sky")}
+Tipe {submodules.ch_color_style("utang","sky")}
+Nominal {submodules.ch_color_style(dis_nom,"sky")} pada dompet {submodules.ch_color_style(dompet,"sky")}
+''')
         
-        # jika penggunana ingin menyelesaikan pembuatan utang
+        # memberikan pilihan kepada pengguna apakah ingin menyelesaikan pembuatan utang atau tidak
+        finalisasi = submodules.input_of_yatidak("Apakah Anda ingin finalisasi pembuatan utang? (y/t) ")
+        
+        # jika pengguna ingin menyelesaikan pembuatan utang
         if finalisasi == "y":
             # menambahkan data utang ke file CSV
             rekap_utang(nama_utang, dompet, nominal_utang)

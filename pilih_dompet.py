@@ -3,23 +3,32 @@ import submodules
 def pilih_dompet():
     while True:
         # Buka file dompet
-        header, list_dompet = submodules.open_read_csv("dompet.csv")
+        hd_dompet, list_dompet = submodules.open_read_csv("dompet.csv")
 
         # Tampilkan nama dan nominal dompet
-        for nama, nominal in list_dompet:
-            print(nama, nominal)
-        print("buat")
+        dis_tl = [ [id+1, row[0], f"Rp{int(row[1]):^12,}"] for id,row in enumerate(list_dompet) ]
+        dis_tl.append([0, "buat"])
+        submodules.display_table(dis_tl, [""] + hd_dompet)
         
         # Input nama dompet atau buat
-        opsi = [ele[0] for ele in list_dompet] + ["buat"]
-        pilih = submodules.input_of_options("Pilih dompet kena transaksi atau buat dompet",opsi)
+        banyak_dompet = len(list_dompet)
+        opsi = list(range( banyak_dompet+1 ))
+        if banyak_dompet == 0:
+            print("Anda belum punya dompet!")
+            print("Diarahkan ke bagian buat dompet")
+            pilih = 0
+        
+        elif banyak_dompet == 1:
+            pilih = submodules.input_of_int_options(f"Input 1 untuk pilih dompet atau 0 untuk buat dompet ",opsi)
+        
+        elif banyak_dompet > 1:
+            pilih = submodules.input_of_int_options(f"Input 1-{banyak_dompet} untuk pilih dompet atau 0 untuk buat dompet ",opsi)
 
         # Apabila nama dompet terpilih, kembalikan dompet terpilih dan tutup subprogram
-        if pilih != "buat":
-            indeks = opsi.index(pilih)
-            return list_dompet[indeks][0], int(list_dompet[indeks][1])
+        if pilih != 0:
+            return list_dompet[pilih-1][0], int(list_dompet[pilih-1][1])
         
-        # Apabila input buat,
+        # Apabila input 0 (buat),
         # Masukkan nama dompet
         nama = submodules.input_normal("Masukkan nama dompet : ")
 
@@ -27,9 +36,11 @@ def pilih_dompet():
         nominal = submodules.input_money("Masukkan nominal awal dompet : ")
 
         # Konfirmasi input
-        print(f'''Konfirmasi:
-Nama dompet  = {nama}
-Nominal awal = Rp{nominal:,}''')
+        dis_nom = f"Rp{nominal:,}"
+        
+        print(f'''Konfirmasi pembuatan dompet:
+Nama dompet  = {submodules.ch_color_style(nama,"sky")}
+Nominal awal = {submodules.ch_color_style(dis_nom,"sky")}''')
         
         # Konfirmasi penyimpanan dompet baru
         konfir_input = submodules.input_of_yatidak("Apakah mau menyimpan dompet? (y/t) ")
@@ -39,14 +50,17 @@ Nominal awal = Rp{nominal:,}''')
             tulis = [[ nama,nominal ]]
             submodules.open_append_csv("dompet.csv", tulis)
 
-def tulis_dompet(namadompet, code:str, nominal:int):
+def tulis_dompet(namadompet, code:int, nominal:int):
     # Buka file dompet
     header, list_dompet = submodules.open_read_csv("dompet.csv")
 
     # Sesuai kode, ubah nominal dari dompet terpilih
     for ele in list_dompet:
         if ele[0] == namadompet:
-            ele[1] = int(ele[1]) + nominal if code == "1" else int(ele[1]) - nominal
+            ele[1] = int(ele[1]) + nominal if code == 1 else int(ele[1]) - nominal
     
     # Tulis perubahan pada file dompet kembali
     submodules.open_write_all_csv("dompet.csv",list_dompet, header)
+
+if __name__ == "__main__":
+    print(pilih_dompet())
