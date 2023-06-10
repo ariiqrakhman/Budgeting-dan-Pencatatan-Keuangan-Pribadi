@@ -3,13 +3,15 @@ from csv import reader, writer
 from tabulate import tabulate
 
 def open_read_csv(filename):
-    filepath = path.join(getcwd(),"files",filename)
+    filepath = path.join(getcwd(), "files", filename)
     with open(filepath, "r", newline="") as f:
-        baca = list(reader(f))
+        lines = filter(lambda x: x.strip(), f)  # Exclude empty lines
+        baca = list(reader(lines))
         header = baca[0]
         content = baca[1:]
     
     return header, content
+
 
 def open_write_all_csv(filename, ds, hd):
     filepath = path.join(getcwd(),"files",filename)
@@ -49,7 +51,7 @@ def input_normal(prompt:str):
             print(er)
     return ans.lower()
 
-def input_of_options(prompt:str, ls_options:list, errormsg = "Input Tidak Valid!"):
+def input_of_str_options(prompt:str, ls_options:list, errormsg = "Input Tidak Valid!"):
     while True:
         try:
             ans = input(prompt+"\n")
@@ -58,6 +60,18 @@ def input_of_options(prompt:str, ls_options:list, errormsg = "Input Tidak Valid!
         except AssertionError as er:
             print(er)
     return ans.lower()
+
+def input_of_int_options(prompt:str, ls_options:list, errormsg = "Input Tidak Valid!"):
+    while True:
+        try:
+            ans = int(input(prompt+"\n"))
+            assert ans in ls_options, errormsg
+            break
+        except AssertionError as er:
+            print(er)
+        except ValueError:
+            print(errormsg, f"\nmasukkan opsi yang valid: {ls_options}")
+    return ans
 
 def input_of_yatidak(prompt:str, errormsg= "Input Tidak Valid!"):
     while True:
@@ -81,12 +95,12 @@ def input_money(prompt:str):
             print("Masukkan uang dengan benar")
     return amount
 
-def input_money_w_params(prompt:str, code:str, moneyparam:int):
+def input_money_w_params(prompt:str, code:int, moneyparam:int):
     while True:
         try:
             amount = int(input(prompt+"\n"))
             assert amount >= 0, "Uang tidak negatif!"
-            assert moneyparam - amount >= 0 if code == "0" else True, "Uang tidak cukup!"
+            assert moneyparam - amount >= 0 if code == 0 else True, "Uang tidak cukup!"
             break
         except ValueError:
             print("Masukkan uang dengan benar")
@@ -115,8 +129,12 @@ def ch_color_style(value, color:str="", style:str=""):
     }
     return f"{fmt[style]}{fmt[color]}{value}{fmt['reset']}"
 
-def display_table(values:list, header:list):
-    print(tabulate(values, headers= header, tablefmt="rst", stralign= "center"))
+def display_table(values:list, header:list, header_cond:bool= True):
+    print("\n" +tabulate(values, headers= header if header_cond == True else False, tablefmt="rst", stralign= "center"))
+
+
+
+
 
 
 
