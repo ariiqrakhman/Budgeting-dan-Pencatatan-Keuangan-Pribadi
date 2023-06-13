@@ -9,7 +9,11 @@ def buat_pdf_1():
     hd_iv = ["","Tanggal", "Dompet", "Tipe", "pemasukan", "pengeluaran"]
     ls_iv = []
 
+<<<<<<< HEAD
     _, ls_tr = submodules.open_read_csv("sejarah_transaksi.csv")
+=======
+    hd_tr, ls_tr = submodules.open_read_csv("sejarah_transaksi.csv")
+>>>>>>> e8160489aa84e99b36f62e50d4012a95929535fc
 
     # Restriksi 30 hari yg lalu
     hari_ini = date.today()

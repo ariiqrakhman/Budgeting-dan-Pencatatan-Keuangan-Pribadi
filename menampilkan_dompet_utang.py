@@ -23,7 +23,11 @@ def menampilkan_dompet_utang():
         submodules.display_table(ls_utang, hd_utang)
         print()
     else:
+<<<<<<< HEAD
         print("\nSelamat, Kamu tidak memiliki utang!\n")
+=======
+        print("Selamat, Kamu tidak memiliki utang!")
+>>>>>>> e8160489aa84e99b36f62e50d4012a95929535fc
 
 if __name__ == "__main__":
     menampilkan_dompet_utang()

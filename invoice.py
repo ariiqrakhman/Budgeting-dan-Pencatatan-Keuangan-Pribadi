@@ -44,17 +44,30 @@ def invoice():
     buat_pdf = submodules.input_of_yatidak("Apakah mau membuat pdf invoice? (y/t) ")
     if buat_pdf == "y":
         from pdf_1 import buat_pdf_1 # Pemanggilan pembuat pdf tabel invoice
+<<<<<<< HEAD
         from pdf_2_3 import buat_pdf_2_3 # Pemanggilan pembuatan pdf grafik keuangan
         from pdf_4_5 import buat_pdf_4_5 # Pemanggilan pembuatan pdf chart lingkaran
 
         buat_pdf_1()
         buat_pdf_2_3()
         buat_pdf_4_5()
+=======
+        from pdf_2 import buat_pdf_2 # Pemanggilan pembuatan pdf grafik keuangan
+        from pdf_3_4 import buat_pdf_3_4 # Pemanggilan pembuatan pdf chart lingkaran
+
+        buat_pdf_1()
+        buat_pdf_2()
+        buat_pdf_3_4()
+>>>>>>> e8160489aa84e99b36f62e50d4012a95929535fc
 
         from PyPDF2 import PdfMerger # Mulai penggabungan pdf
 
         # Daftar file pdf
+<<<<<<< HEAD
         pdf_files = ['pdf_1.pdf', 'pdf_2.pdf', 'pdf_3.pdf', 'pdf_4.pdf', 'pdf_5.pdf']
+=======
+        pdf_files = ['pdf_1.pdf', 'pdf_2.pdf', 'pdf_3.pdf', 'pdf_4.pdf']
+>>>>>>> e8160489aa84e99b36f62e50d4012a95929535fc
 
         # Mulai penggabungan pdf
         merger = PdfMerger()
@@ -73,7 +86,11 @@ def invoice():
         merger.close()
         
         # Hapus pdf lama
+<<<<<<< HEAD
         for ele in pdf_files + ["pdf_2.png", "pdf_3.png"]:
+=======
+        for ele in pdf_files + ["pdf_2.png"]:
+>>>>>>> e8160489aa84e99b36f62e50d4012a95929535fc
             remove(join(getcwd(),ele))
 
         # Buka file pdf (Ada kemungkinan tidak berhasil)
