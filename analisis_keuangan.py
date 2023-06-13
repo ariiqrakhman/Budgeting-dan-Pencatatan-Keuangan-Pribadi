@@ -18,6 +18,12 @@ def analisis_keuangan():
             break
         ls_tr_new.append(ele)
 
+    # Cek transaksi 30 hari ada
+    if len(ls_tr_new) == 0:
+        print("Kamu belum membuat transaksi 30 hari ini!")
+        print("Tidak bisa melakukan analisis keuangan")
+        return
+
     # Pertambahan/pengurangan dompet
     hd_dp.append("Perubahan")
     for i in range(len(ls_tr_new)):
