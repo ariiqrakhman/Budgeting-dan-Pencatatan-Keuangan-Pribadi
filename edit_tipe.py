@@ -11,7 +11,7 @@ def buat_tipe(code:int):
 
     # Konfirmasi tipe baru
     print(f'''Konfirmasi pembuatan tipe {tipe}
-nama tipe = {nama}''')
+nama tipe = {submodules.ch_color_style(nama,"sky")}''')
         
     konfir_input = submodules.input_of_yatidak(f"Apakah mau menyimpan tipe {tipe}? (y/t) ")
 
@@ -113,7 +113,7 @@ Tipe {submodules.ch_color_style(tipe_dihapus, "blue")} dari {submodules.ch_color
             konfir_hapus = submodules.input_of_yatidak("Yakin ingin menghapus tipe? (y/t) ")
             # Jika konfir diterima, hapus tipe dan tulis ulang file tipe
             if konfir_hapus == "y":
-                if pilih_label < byk_tipe1:
+                if pilih_label <= byk_tipe1:
                     ls_in.pop(pilih_label-1)
                     submodules.open_write_all_csv("tipe_pemasukan.csv", ls_in, hd_in)
                 else:

@@ -30,12 +30,14 @@ def pemasukan_pengeluaran():
         #masukan nominal pemasukan/pengeluaran
         if inputpp == 1 :
             nominal = submodules.input_money("Masukkan nominal pemasukan :")
+            clr = "sky"
             tr = "pemasukan"
         elif inputpp == 0 :
             nominal = submodules.input_money_w_params("Masukkan nominal pengeluaran :", 0, nominalawal)
             if nominal == None:
                 print(submodules.ch_color_style("Terjadi kesalahan, kembali ke menu utama","yellow"))
                 break # Ketika nominal pengeluaran gagal didapatkan
+            clr = "red"
             tr = "pengeluaran"
 
         #memilih tipe transaksi
@@ -45,9 +47,9 @@ def pemasukan_pengeluaran():
         dis_nom = f"Rp{nominal:,}"
 
         print(f'''Konfirmasi pembuatan transaksi:
-Transaksi {submodules.ch_color_style(tr,"sky")}
-Tipe {submodules.ch_color_style(pilihtipe,"sky")}
-Nominal {submodules.ch_color_style(dis_nom,"sky")} pada dompet {submodules.ch_color_style(pilih,"sky")}
+Transaksi {submodules.ch_color_style(tr,clr)}
+Tipe {submodules.ch_color_style(pilihtipe,clr)}
+Nominal {submodules.ch_color_style(dis_nom,clr)} pada dompet {submodules.ch_color_style(pilih,"sky")}
 ''')
 
         # finalisasi pembuatan transaksi
