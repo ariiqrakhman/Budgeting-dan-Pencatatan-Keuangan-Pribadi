@@ -3,6 +3,9 @@ from pilih_dompet import pilih_dompet
 from pemasukan_pengeluaran import rekap_pemasukan_pengeluaran
 
 def bayar_utang():
+    # Identitas subprogram
+    print("\n"+"BAYAR UTANG".center(50,"=")+"\n")    
+
     # Membuka file CSV dan mendapatkan header dan daftar utang
     header, list_utang = submodules.open_read_csv("utang.csv")
     banyak_utang = len(list_utang)
@@ -16,17 +19,19 @@ def bayar_utang():
         submodules.display_table(dis_ls_utang, [""]+header)
 
         # Meminta pengguna untuk memilih utang yang akan dibayar atau keluar dari program
-        while True:
+        while True: # Pengulangan permintaan input pilihan utang
+            # Meminta input user untuk pemilihan utang dibayar
             opsi = list(range( banyak_utang+1 ))
             if banyak_utang == 1:  
                 utang_bayar = submodules.input_of_int_options(f"Input 1 untuk utang dibayar atau 0 untuk keluar", opsi)
-
             else:  
                 utang_bayar = submodules.input_of_int_options(f"Input 1-{banyak_utang} untuk utang dibayar atau 0 untuk keluar", opsi)
 
+            # Apabila user memilih keluar
             if utang_bayar == 0:
                 print("Konfirmasi keluar")
-                return None
+                return None # Keluar dari loop dan subprogram
+            # Apabila memilih utang dibayar
             elif utang_bayar in opsi:
                 nominal_utang = int(list_utang[utang_bayar-1][1])
         
@@ -42,15 +47,19 @@ def bayar_utang():
                 except AssertionError as er:
                     print(er)
         
+            nominal_utang_dis = f"Rp{nominal_utang:,}"
+            dibayar_dis = f"Rp{dibayar:,}"
             # Konfirmasi bayar utang
             print(f'''Konfirmasi bayar utang:
 nama utang = {submodules.ch_color_style(list_utang[utang_bayar-1][0],"sky")}
-nominal utang = {submodules.ch_color_style(nominal_utang,"sky")}
-dibayar = {submodules.ch_color_style(dibayar,"sky")}''')
+nominal utang = {submodules.ch_color_style(nominal_utang_dis,"sky")}
+dibayar = {submodules.ch_color_style(dibayar_dis,"red")} dengan dompet {submodules.ch_color_style(dompet,"sky")}''')
             
+            # Apabila konfir bayar utang, keluar dari while loop
             konfir_bayar = submodules.input_of_yatidak("Apakah mau membayar utang? (y/t) ")
             if konfir_bayar == "y":
                 break
+            # Apabila tidak konfir, kembali mengulang while loop
         
         # Pengurangan utang
         list_utang[utang_bayar-1][1] = nominal_utang - dibayar

@@ -5,23 +5,26 @@ def pilih_dompet():
         # Buka file dompet
         hd_dompet, list_dompet = submodules.open_read_csv("dompet.csv")
 
-        # Tampilkan nama dan nominal dompet
+        # Persiapan Tampilan nama dan nominal dompet
         dis_tl = [ [id+1, row[0], f"Rp{int(row[1]):^12,}"] for id,row in enumerate(list_dompet) ]
         dis_tl.append([0, "buat"])
-        submodules.display_table(dis_tl, [""] + hd_dompet)
         
         # Input nama dompet atau buat
         banyak_dompet = len(list_dompet)
         opsi = list(range( banyak_dompet+1 ))
+        # Jika belum punya dompet, diarahkan untuk buat dompet baru
         if banyak_dompet == 0:
             print("Anda belum punya dompet!")
             print("Diarahkan ke bagian buat dompet")
             pilih = 0
         
+        # Jika sudah ada dompet, dompet dan nominalnya ditampilkan
         elif banyak_dompet == 1:
+            submodules.display_table(dis_tl, [""] + hd_dompet)
             pilih = submodules.input_of_int_options(f"Input 1 untuk pilih dompet atau 0 untuk buat dompet ",opsi)
         
         elif banyak_dompet > 1:
+            submodules.display_table(dis_tl, [""] + hd_dompet)
             pilih = submodules.input_of_int_options(f"Input 1-{banyak_dompet} untuk pilih dompet atau 0 untuk buat dompet ",opsi)
 
         # Apabila nama dompet terpilih, kembalikan dompet terpilih dan tutup subprogram
@@ -31,23 +34,16 @@ def pilih_dompet():
         # Apabila input 0 (buat),
         # Masukkan nama dompet
         nama = submodules.input_normal("Masukkan nama dompet : ")
-
-        # Masukkan nominal awal dompet
-        nominal = submodules.input_money("Masukkan nominal awal dompet : ")
-
-        # Konfirmasi input
-        dis_nom = f"Rp{nominal:,}"
         
         print(f'''Konfirmasi pembuatan dompet:
-Nama dompet  = {submodules.ch_color_style(nama,"sky")}
-Nominal awal = {submodules.ch_color_style(dis_nom,"sky")}''')
+Nama dompet  = {submodules.ch_color_style(nama,"sky")}''')
         
         # Konfirmasi penyimpanan dompet baru
         konfir_input = submodules.input_of_yatidak("Apakah mau menyimpan dompet? (y/t) ")
 
         # Apabila input y, simpan dompet
         if konfir_input == "y":
-            tulis = [[ nama,nominal ]]
+            tulis = [[ nama, 0 ]]
             submodules.open_append_csv("dompet.csv", tulis)
 
 def tulis_dompet(namadompet, code:int, nominal:int):

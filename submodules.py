@@ -12,7 +12,6 @@ def open_read_csv(filename):
     
     return header, content
 
-
 def open_write_all_csv(filename, ds, hd):
     filepath = path.join(getcwd(),"files",filename)
     with open(filepath, "w", newline="") as f:
@@ -96,10 +95,14 @@ def input_money(prompt:str):
     return amount
 
 def input_money_w_params(prompt:str, code:int, moneyparam:int):
+    counter = 0
     while True:
         try:
+            if counter >= 3:
+                return None
             amount = int(input(prompt+"\n"))
             assert amount >= 0, "Uang tidak negatif!"
+            counter += 1
             assert moneyparam - amount >= 0 if code == 0 else True, "Uang tidak cukup!"
             break
         except ValueError:
@@ -130,11 +133,4 @@ def ch_color_style(value, color:str="", style:str=""):
     return f"{fmt[style]}{fmt[color]}{value}{fmt['reset']}"
 
 def display_table(values:list, header:list, header_cond:bool= True):
-    print("\n" +tabulate(values, headers= header if header_cond == True else False, tablefmt="rst", stralign= "center"))
-
-
-
-
-
-
-
+    print(tabulate(values, headers= header if header_cond == True else False, tablefmt="rst", stralign= "center"))
