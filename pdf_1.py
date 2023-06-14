@@ -27,43 +27,43 @@ def buat_pdf_1():
         else:
             ls_iv.append([ id+1, ele[0], ele[3], ele[2], None, f"Rp{int(ele[4]):>12,}" ])
 
-    # Generate PDF file
+    # Pembuatan file pdf
     output_file = "pdf_1.pdf"
     title_text = "Tabel sejarah transaksi 30 hari terakhir"
     doc = SimpleDocTemplate(output_file, pagesize=letter, orientation='portrait')
     elements = []
 
-    # Add the title as a Paragraph object
+    # Penambahan judul pada file
     styles = getSampleStyleSheet()
     title = Paragraph(title_text, styles['Title'])
     elements.append(title)
 
-    # Convert table data to a list of lists
+    # Mengumpulkan data tabel terdiri dari header dan isi
     table_data = [hd_iv] + ls_iv
 
-    # Create a Table object
+    # Membuat objek/memori tabel
     table = Table(table_data)
 
-    # Set the style for the table
+    # Membuat model tabel
     style = TableStyle([
         ('ALIGN', (0, 0), (-1, -1), 'RIGHT'),
-        ('TEXTCOLOR', (0, 0), (-1, 0), colors.black),  # Set the text color for the header row
-        ('BACKGROUND', (0, 0), (-1, 0), colors.grey),  # Set the background color for the header row
-        ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),  # Set the font and style for the header row
+        ('TEXTCOLOR', (0, 0), (-1, 0), colors.black),  # Setting font color header
+        ('BACKGROUND', (0, 0), (-1, 0), colors.grey),  # Setting backgroung header
+        ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),  # Setting font style header
         ('FONTSIZE', (0, 0), (-1, 0), 12),
-        ('BOTTOMPADDING', (0, 0), (-1, 0), 8),  # Add bottom padding to the header row
-        ('TOPPADDING', (0, 0), (-1, 0), 8),  # Add top padding to the header row
-        ('BOTTOMPADDING', (0, 1), (-1, -1), 4),  # Add bottom padding to the data rows
-        ('TOPPADDING', (0, 1), (-1, -1), 4),  # Add top padding to the data rows
-        ('GRID', (0, 0), (-1, -1), 1, colors.black),  # Add borders to all cells
-        ('BACKGROUND', (4, 1), (4, -1), colors.lightgreen),  # Set a slightly green background for the fourth column
-        ('BACKGROUND', (5, 1), (5, -1), colors.lightcoral),  # Set a slightly red background for the fifth column
+        ('BOTTOMPADDING', (0, 0), (-1, 0), 8), 
+        ('TOPPADDING', (0, 0), (-1, 0), 8),  
+        ('BOTTOMPADDING', (0, 1), (-1, -1), 4),  
+        ('TOPPADDING', (0, 1), (-1, -1), 4),  
+        ('GRID', (0, 0), (-1, -1), 1, colors.black),  # Setting cell border
+        ('BACKGROUND', (4, 1), (4, -1), colors.lightgreen),  # Setting background hijau kolom ke-4
+        ('BACKGROUND', (5, 1), (5, -1), colors.lightcoral),  # Setting backgroung merah kolom ke-5
     ])
     
     table.setStyle(style)
 
-    # Add the Table object to the elements list
+    # Tambahkan tabel
     elements.append(table)
 
-    # Build the PDF document
+    # Buat file pdf
     doc.build(elements)

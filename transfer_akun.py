@@ -29,6 +29,8 @@ def transfer_akun():
     if adm > 0:
         print(f"1. {dompet_1}\n2. {dompet_2}")
         kena_adm = submodules.input_of_int_options("Dompet mana yang terkena admin? ", [1,2])
+    else:
+        kena_adm = 0
 
     nominal_dis = f"Rp{nominal_tf:,}"
     print(f"""Konfirmasi transfer akun :
@@ -39,7 +41,7 @@ ke {submodules.ch_color_style(dompet_2, "sky")}""")
     if adm > 0:
         if kena_adm == 1:
             print(f'Biaya admin {submodules.ch_color_style(f"Rp{adm:,}", "red")} pada {dompet_1}')
-        else:
+        elif kena_adm == 2:
             print(f'Biaya admin {submodules.ch_color_style(f"Rp{adm:,}", "red")} pada {dompet_2}')
 
     konfir = submodules.input_of_yatidak(f"Yakin melakukan transfer akun? (y/t) ")
@@ -54,7 +56,7 @@ ke {submodules.ch_color_style(dompet_2, "sky")}""")
             nominal_1 -= adm
             rekap_pemasukan_pengeluaran(0, "dan lain-lain", dompet_1, adm)
 
-        else:
+        elif kena_adm == 2:
             nominal_2 -= adm
             rekap_pemasukan_pengeluaran(0, "dan lain-lain", dompet_2, adm)
 
