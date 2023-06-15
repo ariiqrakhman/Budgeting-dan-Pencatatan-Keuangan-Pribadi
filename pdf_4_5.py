@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 import submodules
+from datetime import date, timedelta
 
 def buat_pdf_4_5():
     # Pembacaan file sejarah_transaksi
@@ -10,12 +11,19 @@ def buat_pdf_4_5():
     # Persiapan pembuatan x-y key-value untuk distribusi pengeluaran
     dict_ty0 = {}
 
+    # Restriksi 30 hari ke belakang
+    current_date = date.today()
+    date_30_back = (current_date - timedelta(days=30)).strftime("%Y/%m/%d")
+
     # pengisian x-y
     for ele in ls_tr:
-        _, kode, tipe, _, nominal = ele
+        tgl, kode, tipe, _, nominal = ele
         # Distribusi tidak melibatkan tipe transfer
         if tipe == "transfer_akun": 
             continue
+        # Distribusi hanya pada 30 hari terakhir
+        if tgl < date_30_back:
+            break
         if kode == "1":
             if tipe not in dict_ty1:
                 dict_ty1[tipe] = int(nominal)

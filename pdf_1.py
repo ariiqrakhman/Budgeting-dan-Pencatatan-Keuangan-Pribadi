@@ -1,4 +1,4 @@
-import submodules
+import submodules as sdl
 from datetime import date, timedelta
 from reportlab.lib.pagesizes import letter
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph
@@ -9,7 +9,7 @@ def buat_pdf_1():
     hd_iv = ["","Tanggal", "Dompet", "Tipe", "pemasukan", "pengeluaran"]
     ls_iv = []
 
-    _, ls_tr = submodules.open_read_csv("sejarah_transaksi.csv")
+    _, ls_tr = sdl.open_read_csv("sejarah_transaksi.csv")
 
     # Restriksi 30 hari yg lalu
     hari_ini = date.today()
