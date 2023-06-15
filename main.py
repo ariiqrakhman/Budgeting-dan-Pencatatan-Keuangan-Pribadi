@@ -40,14 +40,14 @@ def main():
         opsi = list(range(8))
 
         # Tampilkan menu
-        submodules.display_table([ [ ele[0], ele[1] ] for ele in menu ], ["", "Menu"])
+        sdl.display_table([ [ ele[0], ele[1] ] for ele in menu ], ["", "Menu"])
         print()
-        pilih_menu = submodules.input_of_int_options("Input 1-7 untuk pilih menu atau 0 untuk keluar ", opsi)
+        pilih_menu = sdl.input_of_int_options("Input 1-7 untuk pilih menu atau 0 untuk keluar ", opsi)
 
         if pilih_menu != 0:
             system("cls")
             menu[pilih_menu-1][2]()
-            _ = submodules.input_normal(submodules.ch_color_style("Tekan Enter untuk kembali ke menu utama", "yellow"))
+            _ = sdl.input_normal(sdl.ch_color_style("Tekan Enter untuk kembali ke menu utama", "yellow"))
             print("... Proses")
             sleep(.75)
             print("... Kembali ke")
@@ -58,9 +58,9 @@ def main():
             sleep(.75)
 
         else:
-            konfir_keluar = submodules.input_of_yatidak("Anda yakin mau keluar? (y/t)")
+            konfir_keluar = sdl.input_of_yatidak("Anda yakin mau keluar? (y/t)")
             if konfir_keluar == "y":
-                print(submodules.ch_color_style("JUMPA LAGI, SEMANGAT BERHEMAT","orange"))
+                print(sdl.ch_color_style("JUMPA LAGI, SEMANGAT BERHEMAT","orange"))
                 break
 
 if __name__ == "__main__":

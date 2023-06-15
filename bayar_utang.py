@@ -7,7 +7,7 @@ def bayar_utang():
     print("\n"+"BAYAR UTANG".center(50,"=")+"\n")    
 
     # Membuka file CSV dan mendapatkan header dan daftar utang
-    header, list_utang = submodules.open_read_csv("utang.csv")
+    header, list_utang = sdl.open_read_csv("utang.csv")
     banyak_utang = len(list_utang)
 
     # Memeriksa apakah ada utang dalam daftar
@@ -16,20 +16,20 @@ def bayar_utang():
         dis_ls_utang = [ [id+1, row[0], f"Rp{int(row[1]):>10,}"] for id,row in enumerate(list_utang) ]
         dis_ls_utang.append([0, "keluar"])
 
-        submodules.display_table(dis_ls_utang, [""]+header)
+        sdl.display_table(dis_ls_utang, [""]+header)
 
         # Meminta pengguna untuk memilih utang yang akan dibayar atau keluar dari program
         while True: # Pengulangan permintaan input pilihan utang
             # Meminta input user untuk pemilihan utang dibayar
             opsi = list(range( banyak_utang+1 ))
             if banyak_utang == 1:  
-                utang_bayar = submodules.input_of_int_options(f"Input 1 untuk utang dibayar atau 0 untuk keluar", opsi)
+                utang_bayar = sdl.input_of_int_options(f"Input 1 untuk utang dibayar atau 0 untuk keluar", opsi)
             else:  
-                utang_bayar = submodules.input_of_int_options(f"Input 1-{banyak_utang} untuk utang dibayar atau 0 untuk keluar", opsi)
+                utang_bayar = sdl.input_of_int_options(f"Input 1-{banyak_utang} untuk utang dibayar atau 0 untuk keluar", opsi)
 
             # Apabila user memilih keluar
             if utang_bayar == 0:
-                konfir_keluar = submodules.input_of_yatidak("Yakin keluar dari subprogram? (y/t) ")
+                konfir_keluar = sdl.input_of_yatidak("Yakin keluar dari subprogram? (y/t) ")
                 if konfir_keluar == "y":
                     print("Keluar dari subprogram")
                     return None # Keluar dari loop dan subprogram
@@ -45,7 +45,7 @@ def bayar_utang():
             # Input nominal bayar utang
             while True:
                 try: 
-                    dibayar = submodules.input_money_w_params("Masukkan nominal bayar utang? ",0, nominaldompet)
+                    dibayar = sdl.input_money_w_params("Masukkan nominal bayar utang? ",0, nominaldompet)
                     assert nominal_utang - dibayar >= 0, f"Nominal bayar terlalu banyak, maksimal {nominal_utang}"
                     break
                 except AssertionError as er:
@@ -55,12 +55,12 @@ def bayar_utang():
             dibayar_dis = f"Rp{dibayar:,}"
             # Konfirmasi bayar utang
             print(f'''Konfirmasi bayar utang:
-nama utang = {submodules.ch_color_style(list_utang[utang_bayar-1][0],"sky")}
-nominal utang = {submodules.ch_color_style(nominal_utang_dis,"sky")}
-dibayar = {submodules.ch_color_style(dibayar_dis,"red")} dengan dompet {submodules.ch_color_style(dompet,"sky")}''')
+nama utang = {sdl.ch_color_style(list_utang[utang_bayar-1][0],"sky")}
+nominal utang = {sdl.ch_color_style(nominal_utang_dis,"sky")}
+dibayar = {sdl.ch_color_style(dibayar_dis,"red")} dengan dompet {sdl.ch_color_style(dompet,"sky")}''')
             
             # Apabila konfir bayar utang, keluar dari while loop
-            konfir_bayar = submodules.input_of_yatidak("Apakah mau membayar utang? (y/t) ")
+            konfir_bayar = sdl.input_of_yatidak("Apakah mau membayar utang? (y/t) ")
             if konfir_bayar == "y":
                 break
             # Apabila tidak konfir, kembali mengulang while loop
@@ -73,7 +73,7 @@ dibayar = {submodules.ch_color_style(dibayar_dis,"red")} dengan dompet {submodul
             list_utang.pop(utang_bayar-1)
         
         # Penulisan file utang
-        submodules.open_write_all_csv("utang.csv", list_utang, header)
+        sdl.open_write_all_csv("utang.csv", list_utang, header)
 
         # Penulisan rekap pemasukan/pengeluaran
         rekap_pemasukan_pengeluaran(0, "bayar utang", dompet, dibayar)

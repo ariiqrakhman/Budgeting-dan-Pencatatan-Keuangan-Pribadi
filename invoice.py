@@ -8,11 +8,11 @@ def invoice():
     print("\n"+"INVOICE".center(50,"=")+"\n")
 
     # Persiapan tabel invoice
-    hd_iv = ["","Tanggal", "Dompet", "Tipe", submodules.ch_color_style("Pemasukan","green"), submodules.ch_color_style("Pengeluaran","red")]
+    hd_iv = ["","Tanggal", "Dompet", "Tipe", sdl.ch_color_style("Pemasukan","green"), sdl.ch_color_style("Pengeluaran","red")]
     ls_iv = []
 
     # Buka file sejarah transaksi
-    _ , ls_tr = submodules.open_read_csv("sejarah_transaksi.csv")
+    _ , ls_tr = sdl.open_read_csv("sejarah_transaksi.csv")
 
     # Restriksi 30 hari yg lalu
     hari_ini = date.today()
@@ -32,16 +32,16 @@ def invoice():
     # Pembuatan baris invoice pertabel
     for id,ele in enumerate(ls_tr_new):
         if ele[1] == "1":
-            ls_iv.append([ id+1, ele[0], ele[3], ele[2], submodules.ch_color_style(f"Rp{int(ele[4]):>10,}","green"), None ])
+            ls_iv.append([ id+1, ele[0], ele[3], ele[2], sdl.ch_color_style(f"Rp{int(ele[4]):>10,}","green"), None ])
         else:
-            ls_iv.append([ id+1, ele[0], ele[3], ele[2], None, submodules.ch_color_style(f"Rp{int(ele[4]):>10,}","red") ])
+            ls_iv.append([ id+1, ele[0], ele[3], ele[2], None, sdl.ch_color_style(f"Rp{int(ele[4]):>10,}","red") ])
 
     # Menampilkan tabel invoice
     print("Daftar transaksi per 30 hari terakhir : ")
-    submodules.display_table(ls_iv, hd_iv)
+    sdl.display_table(ls_iv, hd_iv)
 
     # Tanya apakah akan membuat invoice pdf
-    buat_pdf = submodules.input_of_yatidak("Apakah mau membuat pdf invoice? (y/t) ")
+    buat_pdf = sdl.input_of_yatidak("Apakah mau membuat pdf invoice? (y/t) ")
     if buat_pdf == "y":
         from pdf_1 import buat_pdf_1 # Pemanggilan pembuat pdf tabel invoice
         from pdf_2_3 import buat_pdf_2_3 # Pemanggilan pembuatan pdf grafik keuangan

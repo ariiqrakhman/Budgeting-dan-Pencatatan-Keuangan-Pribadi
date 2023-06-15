@@ -1,4 +1,4 @@
-import submodules
+import submodules as sdl
 from datetime import date, timedelta
 
 def analisis_keuangan():
@@ -6,8 +6,8 @@ def analisis_keuangan():
     print("\n"+"ANALISIS KEUANGAN".center(50,"=")+"\n")
 
     # Buka dan baca file sejarah_transaksi dan dompet
-    hd_dp, ls_dp = submodules.open_read_csv("dompet.csv")
-    _, ls_tr = submodules.open_read_csv("sejarah_transaksi.csv")
+    hd_dp, ls_dp = sdl.open_read_csv("dompet.csv")
+    _, ls_tr = sdl.open_read_csv("sejarah_transaksi.csv")
 
     # Restriksi 30 hari yg lalu
     hari_ini = date.today()
@@ -43,7 +43,7 @@ def analisis_keuangan():
         try:
             ele[1] = f"Rp{int(ele[1]):>10,}"
             color2 = "green" if ele[2] >= 0 else "red"
-            ele[2] = submodules.ch_color_style(f"Rp{ele[2]:>10,}",color2)
+            ele[2] = sdl.ch_color_style(f"Rp{ele[2]:>10,}",color2)
         except IndexError: # Apabila index 1/2 tidak ada
             pass
 
@@ -95,7 +95,7 @@ def analisis_keuangan():
         ele1[1] = f"Rp{int(ele1[1]):>10,}"
     
     # Presentase pengeluaran pada blok ini
-    _, ls_tpex = submodules.open_read_csv("tipe_pengeluaran.csv")
+    _, ls_tpex = sdl.open_read_csv("tipe_pengeluaran.csv")
     notes = []
 
     for j in range(len(ls_ex)-1):
@@ -117,7 +117,7 @@ def analisis_keuangan():
         
         if by_in > prc:
             for i in range(len(ls_ex[j])):
-                ls_ex[j][i] = submodules.ch_color_style(ls_ex[j][i],"red")
+                ls_ex[j][i] = sdl.ch_color_style(ls_ex[j][i],"red")
             notes.append(f"Pengeluaran tipe {ls_ex[j][0]} berada di atas {prc}% pendapatan 30 hari ke belakang")
     
     # Untuk total pengeluaran, batas presentase 70% thd seluruh pendapatan
@@ -130,22 +130,22 @@ def analisis_keuangan():
     ls_ex[-1][1] = f"Rp{all_amount:>10,}"
     if by_in > prc_all:
         for i in range(len(ls_ex[-1])):
-            ls_ex[-1][i] = submodules.ch_color_style(ls_ex[-1][i],"red")
+            ls_ex[-1][i] = sdl.ch_color_style(ls_ex[-1][i],"red")
         notes.append(f"Pengeluaran total berada di atas {prc_all}% pendapatan 30 hari ke belakang")
     
     # Tampilkan update dompet
     print("Analisis Dompet 30 hari ke belakang :")
-    submodules.display_table(ls_dp, hd_dp)
+    sdl.display_table(ls_dp, hd_dp)
     print()
 
     # Tampilkan pendapatan berdasarkan tipe
     print("Analisis Pendapatan berdasarkan tipe 30 hari ke belakang :")
-    submodules.display_table(ls_in, hd_in)
+    sdl.display_table(ls_in, hd_in)
     print()
 
     # Tampilkan pengeluaran berdasarkan tipe
     print("Analisis Pengeluaran berdasarkan tipe 30 hari ke belakang :")
-    submodules.display_table(ls_ex, hd_ex)
+    sdl.display_table(ls_ex, hd_ex)
     print()
 
     # Tampilkan peringatan

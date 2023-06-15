@@ -10,7 +10,7 @@ def rekap_utang(nama:str, dompet:int, nominal:int):
     toadd = [[ nama, nominal ]]
 
     # Penulisan ke csv pada index value pertama
-    submodules.open_append_csv("utang.csv", toadd)
+    sdl.open_append_csv("utang.csv", toadd)
     
 def buat_utang():
     while True: # Pengulangan selama belum keluar dari subprogram
@@ -21,21 +21,21 @@ def buat_utang():
         dompet, nominal_dompet = pilih_dompet()
         
         # meminta pengguna memasukkan nama utang
-        nama_utang = submodules.input_normal("Masukkan nama utang: ")
+        nama_utang = sdl.input_normal("Masukkan nama utang: ")
 
         # meminta pengguna memasukkan nominal utang
-        nominal_utang = submodules.input_money("Masukkan nominal utang: ")
+        nominal_utang = sdl.input_money("Masukkan nominal utang: ")
 
         # Konfirmasi buat utang
         dis_nom = f"Rp{nominal_utang:,}"
         print(f'''Konfirmasi pembuatan transaksi:
-Transaksi {submodules.ch_color_style("pemasukan","sky")}
-Tipe {submodules.ch_color_style("utang","sky")}
-Nominal {submodules.ch_color_style(dis_nom,"sky")} pada dompet {submodules.ch_color_style(dompet,"sky")}
+Transaksi {sdl.ch_color_style("pemasukan","sky")}
+Tipe {sdl.ch_color_style("utang","sky")}
+Nominal {sdl.ch_color_style(dis_nom,"sky")} pada dompet {sdl.ch_color_style(dompet,"sky")}
 ''')
         
         # memberikan pilihan kepada pengguna apakah ingin menyelesaikan pembuatan utang atau tidak
-        finalisasi = submodules.input_of_yatidak("Apakah Anda ingin finalisasi pembuatan utang? (y/t) ")
+        finalisasi = sdl.input_of_yatidak("Apakah Anda ingin finalisasi pembuatan utang? (y/t) ")
         
         # jika pengguna ingin menyelesaikan pembuatan utang
         if finalisasi == "y":
@@ -47,7 +47,7 @@ Nominal {submodules.ch_color_style(dis_nom,"sky")} pada dompet {submodules.ch_co
         # jika pengguna tidak ingin menyelesaikan pembuatan utang    
         elif finalisasi == "t":
             # meminta pengguna memilih apakah ingin membuat utang baru atau tidak
-            buat_lagi = submodules.input_of_yatidak("Apakah Anda ingin membuat utang baru? (input t untuk keluar dari subprogram) (y/t): ")
+            buat_lagi = sdl.input_of_yatidak("Apakah Anda ingin membuat utang baru? (input t untuk keluar dari subprogram) (y/t): ")
             # jika pengguna tidak ingin membuat utang baru
             if buat_lagi == "t":
                 # keluar dari loop while
