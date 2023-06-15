@@ -48,9 +48,9 @@ def analisis_keuangan():
             pass
 
     # Jumlahkan pendapatan berdasarkan tipe dan jumlahkan pengeluaran berdasarkan tipe
-    hd_in = ["Income", "Subtotal"] # Header distribusi pendapatan
+    hd_in = ["Pemasukan", "Subtotal"] # Header distribusi pendapatan
     ls_in = []
-    hd_ex = ["Expenses", "SubTotal", "Percentage"] # Header distribusi pengeluaran
+    hd_ex = ["Pengeluaran", "SubTotal", "% Thd pemasukan"] # Header distribusi pengeluaran
     ls_ex = []
 
     for i in range(len(ls_tr_new)):
@@ -118,7 +118,7 @@ def analisis_keuangan():
         if by_in > prc:
             for i in range(len(ls_ex[j])):
                 ls_ex[j][i] = submodules.ch_color_style(ls_ex[j][i],"red")
-            notes.append(f"Pengeluaran tipe {ls_ex[j][0]} berada di atas {prc}% pendapatan bulan ini")
+            notes.append(f"Pengeluaran tipe {ls_ex[j][0]} berada di atas {prc}% pendapatan 30 hari ke belakang")
     
     # Untuk total pengeluaran, batas presentase 70% thd seluruh pendapatan
     all_amount = int(ls_ex[-1][1])
@@ -131,7 +131,7 @@ def analisis_keuangan():
     if by_in > prc_all:
         for i in range(len(ls_ex[-1])):
             ls_ex[-1][i] = submodules.ch_color_style(ls_ex[-1][i],"red")
-        notes.append(f"Pengeluaran total berada di atas {prc_all}% pendapatan bulan ini")
+        notes.append(f"Pengeluaran total berada di atas {prc_all}% pendapatan 30 hari ke belakang")
     
     # Tampilkan update dompet
     print("Analisis Dompet 30 hari ke belakang :")

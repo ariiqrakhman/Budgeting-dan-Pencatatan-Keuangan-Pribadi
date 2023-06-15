@@ -23,9 +23,9 @@ def buat_pdf_1():
     # Pembuatan baris invoice pertabel
     for id,ele in enumerate(ls_tr_new):
         if ele[1] == "1":
-            ls_iv.append([ id+1, ele[0], ele[3], ele[2], f"Rp{int(ele[4]):>12,}", None ])
+            ls_iv.append([ id+1, ele[0], ele[3], ele[2], f"Rp{int(ele[4]):>10,}", None ])
         else:
-            ls_iv.append([ id+1, ele[0], ele[3], ele[2], None, f"Rp{int(ele[4]):>12,}" ])
+            ls_iv.append([ id+1, ele[0], ele[3], ele[2], None, f"Rp{int(ele[4]):>10,}" ])
 
     # Pembuatan file pdf
     output_file = "pdf_1.pdf"

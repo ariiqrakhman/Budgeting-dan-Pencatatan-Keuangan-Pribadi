@@ -35,7 +35,7 @@ def pemasukan_pengeluaran():
         elif inputpp == 0 :
             nominal = sdl.input_money_w_params("Masukkan nominal pengeluaran :", 0, nominalawal)
             if nominal == None:
-                print(sdl.ch_color_style("Terjadi kesalahan, kembali ke menu utama","yellow"))
+                print(sdl.ch_color_style("Uang tidak cukup, dikembalikan ke menu utama","yellow"))
                 break # Ketika nominal pengeluaran gagal didapatkan
             clr = "red"
             tr = "pengeluaran"
@@ -54,11 +54,11 @@ Nominal {sdl.ch_color_style(dis_nom,clr)} pada dompet {sdl.ch_color_style(pilih,
 
         # finalisasi pembuatan transaksi
         final = sdl.input_of_yatidak("Finalisasi pembuatan transaksi ?(y/t)")
-        if final == "y" :
+        if final == "y" : # Jika konfir input diterima
             rekap_pemasukan_pengeluaran(inputpp, pilihtipe, pilih, nominal)
             break
         # Apakah mau melanjutkan subprogram
-        elif final == "t" :
+        elif final == "t" : # Jika konfir input tidak diterima
             transbaru = sdl.input_of_yatidak("buat transaksi baru? (input t untuk keluar dari subprogram) (y/t)")
             if transbaru == "t":
                 break
