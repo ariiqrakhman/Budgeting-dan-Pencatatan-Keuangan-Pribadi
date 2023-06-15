@@ -18,14 +18,14 @@ def analisis_keuangan():
             break
         ls_tr_new.append(ele)
 
-    # Cek transaksi 30 hari ada
+    # Cek transaksi 30 hari apakah ada
     if len(ls_tr_new) == 0:
         print("Kamu belum membuat transaksi 30 hari ini!")
         print("Tidak bisa melakukan analisis keuangan")
-        return
+        return # Mengakhiri program karena tidak ada transaksi
 
     # Pertambahan/pengurangan dompet
-    hd_dp.append("Perubahan")
+    hd_dp.append("Perubahan") # kolom untuk perubahan dompet
     for i in range(len(ls_tr_new)):
         _, kode, _, dompet, nominal = ls_tr_new[i]
         nominal = int(nominal)
@@ -34,9 +34,9 @@ def analisis_keuangan():
             if dompet == ls_dp[j][0]:
                 tr_index = j
                 break
-        try:
+        try: # Tambahkan nominal pada transaksi apabila index 2 ls_dp ada
             ls_dp[tr_index][2] = ls_dp[tr_index][2] + nominal if kode == "1" else ls_dp[tr_index][2] - nominal
-        except IndexError:
+        except IndexError: # Jika ls_dp index 2 tidak ada
             (ls_dp[tr_index]).append(nominal) if kode == "1" else (ls_dp[tr_index]).append(-nominal)
     
     for ele in ls_dp:
@@ -44,13 +44,13 @@ def analisis_keuangan():
             ele[1] = f"Rp{int(ele[1]):>10,}"
             color2 = "green" if ele[2] >= 0 else "red"
             ele[2] = submodules.ch_color_style(f"Rp{ele[2]:>10,}",color2)
-        except IndexError:
+        except IndexError: # Apabila index 1/2 tidak ada
             pass
 
     # Jumlahkan pendapatan berdasarkan tipe dan jumlahkan pengeluaran berdasarkan tipe
-    hd_in = ["Income", "Subtotal"]
+    hd_in = ["Income", "Subtotal"] # Header distribusi pendapatan
     ls_in = []
-    hd_ex = ["Expenses", "SubTotal", "Percentage"]
+    hd_ex = ["Expenses", "SubTotal", "Percentage"] # Header distribusi pengeluaran
     ls_ex = []
 
     for i in range(len(ls_tr_new)):
@@ -59,7 +59,7 @@ def analisis_keuangan():
         amount = int(ls_tr_new[i][4])
         
         if tipe == "transfer_akun":
-            continue
+            continue # Meninggalkan tipe transfer akun
         
         if code == "1": # Jumlahkan pendapatan berdasarkan tipe pada blok ini
             in_index = -1
@@ -85,11 +85,11 @@ def analisis_keuangan():
 
     # Penambahan total semua tipe pendapatan
     total_in = sum([ ele[1] for ele in ls_in ])
-    ls_in.append(["Total Slrh", total_in])
+    ls_in.append(["Total Seluruh", total_in])
 
     # Penambahan total semua tipe pengeluaran
     total_ex = sum([ ele[1] for ele in ls_ex ])
-    ls_ex.append(["Total Slrh", total_ex])
+    ls_ex.append(["Total Seluruh", total_ex])
 
     for ele1 in ls_in:
         ele1[1] = f"Rp{int(ele1[1]):>10,}"
@@ -102,9 +102,9 @@ def analisis_keuangan():
         amount = int(ls_ex[j][1])
         tipe = ls_ex[j][0]
         
-        # Default batas presentase pengeluaran per tipe 20 % oleh seluruh pendapatan
+        # Default batas presentase pengeluaran per tipe 25 % oleh seluruh pendapatan
         # Ubah presentase tipe apabila ada
-        prc = 20
+        prc = 25
         for k in range(len(ls_tpex)):
             if ls_tpex[k][0] == tipe:
                 prc = float(ls_tpex[k][1])
@@ -151,7 +151,8 @@ def analisis_keuangan():
     # Tampilkan peringatan
     print("Catatan:")
     if len(notes) == 0:
-        print("Selamat, tidak ada catatan untuk pengeluaranmu")
+        print("Selamat, tidak ada catatan untuk pengeluaranmu!")
+        print("Tetap gunakan uang dengan bijak")
     else:
         for ele in notes:
             print(ele)

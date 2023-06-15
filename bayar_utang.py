@@ -29,18 +29,22 @@ def bayar_utang():
 
             # Apabila user memilih keluar
             if utang_bayar == 0:
-                print("Konfirmasi keluar")
-                return None # Keluar dari loop dan subprogram
+                konfir_keluar = submodules.input_of_yatidak("Yakin keluar dari subprogram? (y/t) ")
+                if konfir_keluar == "y":
+                    print("Keluar dari subprogram")
+                    return None # Keluar dari loop dan subprogram
+                else:
+                    continue
             # Apabila memilih utang dibayar
             elif utang_bayar in opsi:
-                nominal_utang = int(list_utang[utang_bayar-1][1])
+                nominal_utang = int(list_utang[utang_bayar-1][1]) # Ambil nominal utang terbayar
         
             # Melanjutkan ke langkah selanjutnya: memilih dompet dan nominal pembayaran
-            dompet, nominaldompet = pilih_dompet()
+            dompet, nominaldompet = pilih_dompet() # Ambil dompet
 
             # Input nominal bayar utang
             while True:
-                try:
+                try: 
                     dibayar = submodules.input_money_w_params("Masukkan nominal bayar utang? ",0, nominaldompet)
                     assert nominal_utang - dibayar >= 0, f"Nominal bayar terlalu banyak, maksimal {nominal_utang}"
                     break
