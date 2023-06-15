@@ -1,4 +1,4 @@
-import submodules
+import submodules as sdl
 from datetime import date, timedelta
 from os import remove, getcwd
 from os.path import join
@@ -50,7 +50,6 @@ def invoice():
         buat_pdf_1()
         buat_pdf_2_3()
         buat_pdf_4_5()
-
 
         from PyPDF2 import PdfMerger # Mulai penggabungan pdf
 

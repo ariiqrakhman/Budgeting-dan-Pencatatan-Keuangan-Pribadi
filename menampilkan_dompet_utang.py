@@ -1,4 +1,4 @@
-import submodules
+import submodules as sdl
 
 def menampilkan_dompet_utang():
     # Akses file domept dan file utang

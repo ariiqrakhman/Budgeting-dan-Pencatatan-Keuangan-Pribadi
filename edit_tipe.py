@@ -1,4 +1,4 @@
-import submodules
+import submodules as sdl
 
 def buat_tipe(code:int):
     # Konfirmasi tipe yang dipilih sebelumnya

@@ -6,7 +6,7 @@ from edit_tipe import edit_tipe
 from analisis_keuangan import analisis_keuangan
 from invoice import invoice
 from menampilkan_dompet_utang import menampilkan_dompet_utang
-import submodules
+import submodules as sdl
 from os import system
 from time import sleep
 

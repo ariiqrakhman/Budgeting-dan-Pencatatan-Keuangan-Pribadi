@@ -1,4 +1,4 @@
-import submodules
+import submodules as sdl
 from pilih_dompet import pilih_dompet
 from pemasukan_pengeluaran import rekap_pemasukan_pengeluaran
 
