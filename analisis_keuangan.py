@@ -3,7 +3,7 @@ from datetime import date, timedelta
 
 def analisis_keuangan():
     # Identitas subprogram
-    print("\n"+"ANALISIS KEUANGAN".center(50,"=")+"\n")
+    print("\n"+" ANALISIS KEUANGAN ".center(50,"=")+"\n")
 
     # Buka dan baca file sejarah_transaksi dan dompet
     hd_dp, ls_dp = sdl.open_read_csv("dompet.csv")
@@ -12,7 +12,7 @@ def analisis_keuangan():
     # Restriksi 30 hari yg lalu
     hari_ini = date.today()
     hari_30_belakang = (hari_ini - timedelta(days=30)).strftime("%Y/%m/%d")
-    ls_tr_new = []
+    ls_tr_new = [] # list untuk menampung list transaksi 30 hari ke belakang
     for ele in ls_tr:
         if ele[0] < hari_30_belakang:
             break
@@ -27,11 +27,12 @@ def analisis_keuangan():
     # Pertambahan/pengurangan dompet
     hd_dp.append("Perubahan") # kolom untuk perubahan dompet
     for i in range(len(ls_tr_new)):
-        _, kode, _, dompet, nominal = ls_tr_new[i]
+        # Akses setiap kolom pada list transaksi
+        _, kode, _, dompet, nominal = ls_tr_new[i] 
         nominal = int(nominal)
-        tr_index = -1
+        tr_index = -1 # Index -1
         for j in range(len(ls_dp)):
-            if dompet == ls_dp[j][0]:
+            if dompet == ls_dp[j][0]: # cari index untuk tr_index
                 tr_index = j
                 break
         try: # Tambahkan nominal pada transaksi apabila index 2 ls_dp ada
@@ -39,6 +40,7 @@ def analisis_keuangan():
         except IndexError: # Jika ls_dp index 2 tidak ada
             (ls_dp[tr_index]).append(nominal) if kode == "1" else (ls_dp[tr_index]).append(-nominal)
     
+    # Ganti warna untuk perubahan dompet 
     for ele in ls_dp:
         try:
             ele[1] = f"Rp{int(ele[1]):>10,}"
@@ -59,28 +61,28 @@ def analisis_keuangan():
         amount = int(ls_tr_new[i][4])
         
         if tipe == "transfer_akun":
-            continue # Meninggalkan tipe transfer akun
+            continue # Mengabaikan tipe transfer akun
         
         if code == "1": # Jumlahkan pendapatan berdasarkan tipe pada blok ini
-            in_index = -1
+            in_index = -1 # index -1
             for p in range(len(ls_in)):
-                if ls_in[p][0] == tipe:
+                if ls_in[p][0] == tipe: # cari index untuk in_index
                     in_index = p
                     break
-            if in_index != -1:
+            if in_index != -1: # Tambahkan nominal jika index bukan -1
                 ls_in[in_index][1] += amount
-            else:
+            else: # Append tipe, nominal jika index -1
                 ls_in.append([tipe, amount])
 
         else: # Penjumlahan pengeluaran berdasarkan tipe pada blok ini
-            ex_index = -1
+            ex_index = -1 # index -1
             for j in range(len(ls_ex)):
                 if ls_ex[j][0] == tipe:
                     ex_index = j
                     break
-            if ex_index != -1:
+            if ex_index != -1: # cari index untuk ex_index
                 ls_ex[ex_index][1] += amount
-            else:
+            else: # Append tipe, nominal jika index -1
                 ls_ex.append([tipe, amount])
 
     # Penambahan total semua tipe pendapatan
@@ -95,17 +97,18 @@ def analisis_keuangan():
         ele1[1] = f"Rp{int(ele1[1]):>10,}"
     
     # Presentase pengeluaran pada blok ini
+    # Ambil batas presentase pada file tipe_pengeluaran 
     _, ls_tpex = sdl.open_read_csv("tipe_pengeluaran.csv")
-    notes = []
+    notes = [] # Catatan peringatan di sini
 
-    for j in range(len(ls_ex)-1):
+    for j in range(len(ls_ex)-1): # Mengecualikan total seluruh ex
         amount = int(ls_ex[j][1])
         tipe = ls_ex[j][0]
         
         # Default batas presentase pengeluaran per tipe 25 % oleh seluruh pendapatan
         # Ubah presentase tipe apabila ada
-        prc = 25
-        for k in range(len(ls_tpex)):
+        prc = 25 # Default presentase 25%
+        for k in range(len(ls_tpex)): # Akses apabila ada presentase kustom
             if ls_tpex[k][0] == tipe:
                 prc = float(ls_tpex[k][1])
 
@@ -122,7 +125,7 @@ def analisis_keuangan():
     
     # Untuk total pengeluaran, batas presentase 70% thd seluruh pendapatan
     all_amount = int(ls_ex[-1][1])
-    prc_all = 70
+    prc_all = 70 # Presentase seluruh pengeluaran dgn batas 70% thd pendapatan
 
     by_in = round(all_amount/total_in*100,2)
     ls_ex[-1].append(f"{by_in}%")
@@ -155,7 +158,7 @@ def analisis_keuangan():
         print("Tetap gunakan uang dengan bijak")
     else:
         for ele in notes:
-            print(ele)
+            print(ele) # Tampilkan setiap peringatan yang ada
 
 if __name__ == "__main__":
     analisis_keuangan()

@@ -3,17 +3,17 @@ import submodules as sdl
 def buat_tipe(code:int):
     # Konfirmasi tipe yang dipilih sebelumnya
     if code == 1:
-        tipe = "Pemasukan"
+        tp = "Pemasukan"
     else:
-        tipe = "Pengeluaran"
+        tp = "Pengeluaran"
     # Buat tipe baru apabila input 0
-    nama = sdl.input_normal(f"Masukkan nama tipe {tipe}")
+    nama = sdl.input_normal(f"Masukkan nama tipe {tp}")
 
     # Konfirmasi tipe baru
-    print(f'''Konfirmasi pembuatan tipe {tipe}
+    print(f'''Konfirmasi pembuatan tipe {tp}
 nama tipe = {sdl.ch_color_style(nama,"sky")}''')
         
-    konfir_input = sdl.input_of_yatidak(f"Apakah mau menyimpan tipe {tipe}? (y/t) ")
+    konfir_input = sdl.input_of_yatidak(f"Apakah mau menyimpan tipe {tp}? (y/t) ")
 
     # Apabila input y, simpan tipe
     if konfir_input == "y":
@@ -80,7 +80,7 @@ def edit_tipe():
 
         # Tampilan menu subprogram
         print("")
-        print("""Pilih menu:
+        print("""Pilih menu subprogram:
 1. Buat tipe baru
 2. Hapus tipe
 3. Edit batas presentase pengeluaran

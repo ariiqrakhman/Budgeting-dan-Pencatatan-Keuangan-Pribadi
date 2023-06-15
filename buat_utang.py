@@ -15,7 +15,7 @@ def rekap_utang(nama:str, dompet:int, nominal:int):
 def buat_utang():
     while True: # Pengulangan selama belum keluar dari subprogram
         # Identitas Subprogram
-        print("\n"+"BUAT UTANG".center(50,"=")+"\n")    
+        print("\n"+" BUAT UTANG ".center(50,"=")+"\n")    
 
         # pilih dompet untuk mencatat utang
         dompet, nominal_dompet = pilih_dompet()

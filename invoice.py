@@ -5,7 +5,7 @@ from os.path import join
 
 def invoice():
     # Identitas Subprogram
-    print("\n"+"INVOICE".center(50,"=")+"\n")
+    print("\n"+" INVOICE ".center(50,"=")+"\n")
 
     # Persiapan tabel invoice
     hd_iv = ["","Tanggal", "Dompet", "Tipe", sdl.ch_color_style("Pemasukan","green"), sdl.ch_color_style("Pengeluaran","red")]
@@ -31,9 +31,9 @@ def invoice():
 
     # Pembuatan baris invoice pertabel
     for id,ele in enumerate(ls_tr_new):
-        if ele[1] == "1":
+        if ele[1] == "1": # untuk pendapatan
             ls_iv.append([ id+1, ele[0], ele[3], ele[2], sdl.ch_color_style(f"Rp{int(ele[4]):>10,}","green"), None ])
-        else:
+        else: # untuk pengeluaran
             ls_iv.append([ id+1, ele[0], ele[3], ele[2], None, sdl.ch_color_style(f"Rp{int(ele[4]):>10,}","red") ])
 
     # Menampilkan tabel invoice
@@ -80,9 +80,5 @@ def invoice():
         import webbrowser
         pdf_file = 'pdf_merge.pdf'
         webbrowser.open_new_tab(pdf_file)
-
-if __name__ == "__main__":
-    invoice()
-
 
 
