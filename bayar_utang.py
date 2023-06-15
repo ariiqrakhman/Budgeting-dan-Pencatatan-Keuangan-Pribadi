@@ -7,13 +7,13 @@ def bayar_utang():
     print("\n"+"BAYAR UTANG".center(50,"=")+"\n")    
 
     # Membuka file CSV dan mendapatkan header dan daftar utang
-    header, list_utang = sdl.open_read_csv("utang.csv")
-    banyak_utang = len(list_utang)
+    header, ls_utang = sdl.open_read_csv("utang.csv")
+    banyak_utang = len(ls_utang)
 
     # Memeriksa apakah ada utang dalam daftar
     if banyak_utang >= 1:
         # Menampilkan daftar utang
-        dis_ls_utang = [ [id+1, row[0], f"Rp{int(row[1]):>10,}"] for id,row in enumerate(list_utang) ]
+        dis_ls_utang = [ [id+1, row[0], f"Rp{int(row[1]):>10,}"] for id,row in enumerate(ls_utang) ]
         dis_ls_utang.append([0, "keluar"])
 
         sdl.display_table(dis_ls_utang, [""]+header)
@@ -37,7 +37,7 @@ def bayar_utang():
                     continue
             # Apabila memilih utang dibayar
             elif utang_bayar in opsi:
-                nominal_utang = int(list_utang[utang_bayar-1][1]) # Ambil nominal utang terbayar
+                nominal_utang = int(ls_utang[utang_bayar-1][1]) # Ambil nominal utang terbayar
         
             # Melanjutkan ke langkah selanjutnya: memilih dompet dan nominal pembayaran
             dompet, nominaldompet = pilih_dompet() # Ambil dompet
@@ -55,7 +55,7 @@ def bayar_utang():
             dibayar_dis = f"Rp{dibayar:,}"
             # Konfirmasi bayar utang
             print(f'''Konfirmasi bayar utang:
-nama utang = {sdl.ch_color_style(list_utang[utang_bayar-1][0],"sky")}
+nama utang = {sdl.ch_color_style(ls_utang[utang_bayar-1][0],"sky")}
 nominal utang = {sdl.ch_color_style(nominal_utang_dis,"sky")}
 dibayar = {sdl.ch_color_style(dibayar_dis,"red")} dengan dompet {sdl.ch_color_style(dompet,"sky")}''')
             
@@ -66,14 +66,14 @@ dibayar = {sdl.ch_color_style(dibayar_dis,"red")} dengan dompet {sdl.ch_color_st
             # Apabila tidak konfir, kembali mengulang while loop
         
         # Pengurangan utang
-        list_utang[utang_bayar-1][1] = nominal_utang - dibayar
+        ls_utang[utang_bayar-1][1] = nominal_utang - dibayar
 
         # Apabila sisa utang 0, utang dihapus
-        if list_utang[utang_bayar-1][1] == 0:
-            list_utang.pop(utang_bayar-1)
+        if ls_utang[utang_bayar-1][1] == 0:
+            ls_utang.pop(utang_bayar-1)
         
         # Penulisan file utang
-        sdl.open_write_all_csv("utang.csv", list_utang, header)
+        sdl.open_write_all_csv("utang.csv", ls_utang, header)
 
         # Penulisan rekap pemasukan/pengeluaran
         rekap_pemasukan_pengeluaran(0, "bayar utang", dompet, dibayar)

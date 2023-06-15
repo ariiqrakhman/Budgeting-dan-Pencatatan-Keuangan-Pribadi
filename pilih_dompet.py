@@ -3,14 +3,14 @@ import submodules as sdl
 def pilih_dompet():
     while True:
         # Buka file dompet
-        hd_dompet, list_dompet = sdl.open_read_csv("dompet.csv")
+        hd_dompet, ls_dompet = sdl.open_read_csv("dompet.csv")
 
         # Persiapan Tampilan nama dan nominal dompet
-        dis_tl = [ [id+1, row[0], f"Rp{int(row[1]):^12,}"] for id,row in enumerate(list_dompet) ]
+        dis_tl = [ [id+1, row[0], f"Rp{int(row[1]):^12,}"] for id,row in enumerate(ls_dompet) ]
         dis_tl.append([0, "buat"])
         
         # Input nama dompet atau buat
-        banyak_dompet = len(list_dompet)
+        banyak_dompet = len(ls_dompet)
         opsi = list(range( banyak_dompet+1 ))
         # Jika belum punya dompet, diarahkan untuk buat dompet baru
         if banyak_dompet == 0:
@@ -31,7 +31,7 @@ def pilih_dompet():
 
         # Apabila nama dompet terpilih, kembalikan dompet terpilih dan tutup subprogram
         if pilih != 0:
-            return list_dompet[pilih-1][0], int(list_dompet[pilih-1][1])
+            return ls_dompet[pilih-1][0], int(ls_dompet[pilih-1][1])
         
         # Apabila input 0 (buat),
         # Masukkan nama dompet
@@ -50,12 +50,12 @@ Nama dompet  = {sdl.ch_color_style(nama,"sky")}''')
 
 def tulis_dompet(namadompet, code:int, nominal:int):
     # Buka file dompet
-    header, list_dompet = sdl.open_read_csv("dompet.csv")
+    header, ls_dompet = sdl.open_read_csv("dompet.csv")
 
     # Sesuai kode, ubah nominal dari dompet terpilih
-    for ele in list_dompet:
+    for ele in ls_dompet:
         if ele[0] == namadompet:
             ele[1] = int(ele[1]) + nominal if code == 1 else int(ele[1]) - nominal
     
     # Tulis perubahan pada file dompet kembali
-    sdl.open_write_all_csv("dompet.csv",list_dompet, header)
+    sdl.open_write_all_csv("dompet.csv",ls_dompet, header)
