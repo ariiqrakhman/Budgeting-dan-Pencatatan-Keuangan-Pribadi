@@ -48,19 +48,19 @@ def main():
             system("cls")
             menu[pilih_menu-1][2]()
             _ = sdl.input_normal(sdl.ch_color_style("Tekan Enter untuk kembali ke menu utama", "yellow"))
-            print("... Proses")
+            print("Proses kembali ke menu utama")
+            print("Silakan tunggu.\r")
             sleep(.75)
-            print("... Kembali ke")
+            print("Silakan tunggu..\r")
             sleep(.75)
-            print("... Menu utama")
-            sleep(.75)
-            print("... --------")
+            print("Silakan tunggu...\r")
             sleep(.75)
 
         else:
-            konfir_keluar = sdl.input_of_yatidak("Anda yakin mau keluar? (y/t)")
+            konfir_keluar = sdl.input_of_yatidak("Anda yakin mau keluar? (y/t) ")
             if konfir_keluar == "y":
-                print(sdl.ch_color_style("JUMPA LAGI, SEMANGAT BERHEMAT","orange"))
+                print(sdl.ch_color_style("TERIMA KASIH TELAH MENGGUNAKAN PROGRAM","orange"))
+                print(sdl.ch_color_style("PROGRAM BERAKHIR","orange"))
                 break
 
 if __name__ == "__main__":

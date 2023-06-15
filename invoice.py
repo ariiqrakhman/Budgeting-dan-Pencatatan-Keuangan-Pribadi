@@ -27,7 +27,7 @@ def invoice():
     if len(ls_tr_new) == 0:
         print("Kamu belum membuat transaksi 30 hari ini!")
         print("Tidak bisa melakukan pembuatan invoice")
-        return
+        return # Mengakhiri subprogram karena tidak ada transaksi
 
     # Pembuatan baris invoice pertabel
     for id,ele in enumerate(ls_tr_new):

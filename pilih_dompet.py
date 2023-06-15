@@ -20,10 +20,12 @@ def pilih_dompet():
         
         # Jika sudah ada dompet, dompet dan nominalnya ditampilkan
         elif banyak_dompet == 1:
+            print("Daftar dompet dapat dipilih :")
             sdl.display_table(dis_tl, [""] + hd_dompet)
             pilih = sdl.input_of_int_options(f"Input 1 untuk pilih dompet atau 0 untuk buat dompet ",opsi)
         
         elif banyak_dompet > 1:
+            print("Daftar dompet dapat dipilih :")
             sdl.display_table(dis_tl, [""] + hd_dompet)
             pilih = sdl.input_of_int_options(f"Input 1-{banyak_dompet} untuk pilih dompet atau 0 untuk buat dompet ",opsi)
 
@@ -57,6 +59,3 @@ def tulis_dompet(namadompet, code:int, nominal:int):
     
     # Tulis perubahan pada file dompet kembali
     sdl.open_write_all_csv("dompet.csv",list_dompet, header)
-
-if __name__ == "__main__":
-    print(pilih_dompet())

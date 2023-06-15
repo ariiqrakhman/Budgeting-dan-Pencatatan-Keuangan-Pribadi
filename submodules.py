@@ -2,16 +2,19 @@ from os import getcwd, path
 from csv import reader, writer
 from tabulate import tabulate
 
+# Subprogram untuk membaca isi file csv
 def open_read_csv(filename):
     filepath = path.join(getcwd(), "files", filename)
     with open(filepath, "r", newline="") as f:
-        lines = filter(lambda x: x.strip(), f)  # Exclude empty lines
+        # Hilangkan spasi lebih dan line kosong
+        lines = filter(lambda x: x.strip(), f)  
         baca = list(reader(lines))
-        header = baca[0]
-        content = baca[1:]
+        header = baca[0] # Line 1 untuk header
+        content = baca[1:] # Line dibawahnya untuk list
     
     return header, content
 
+# Subprogram untuk menulis seluruh isi file csv
 def open_write_all_csv(filename, ds, hd):
     filepath = path.join(getcwd(),"files",filename)
     with open(filepath, "w", newline="") as f:
@@ -19,18 +22,21 @@ def open_write_all_csv(filename, ds, hd):
         tulis.writerow(hd)
         tulis.writerows(ds)
 
+# Subprogram untuk menambah list pada akhir isi file csv
 def open_append_csv(filename, ds):
     filepath = path.join(getcwd(),"files",filename)
     with open(filepath, "a", newline="") as f:
         tulis = writer(f)
         tulis.writerows(ds)
 
+# Subprogram untuk menambah list pada awal isi file csv
 def open_append2first_csv(filename, ds):
     header, content = open_read_csv(filename)
     toinsert = ds[0]
     content.insert(0, toinsert)
     open_write_all_csv(filename, content, header)
 
+# Subprogram untuk mengurutkan list berdasarkan header pada file csv
 def sort_csv_by_hd(filename, sortby:str, reverse_cond:bool = False):
     header, content = open_read_csv(filename)
     index = header.index(sortby)
@@ -41,6 +47,7 @@ def sort_csv_by_hd(filename, sortby:str, reverse_cond:bool = False):
     content.sort(key= sortkey, reverse= reverse_cond)
     open_write_all_csv(filename, content, header)
 
+# Subprogram untuk meminta input tanpa syarat
 def input_normal(prompt:str):
     while True:
         try:
@@ -50,6 +57,7 @@ def input_normal(prompt:str):
             print(er)
     return ans.lower()
 
+# Subprogram untuk meminta input dengan syarat list berisi string
 def input_of_str_options(prompt:str, ls_options:list, errormsg = "Input Tidak Valid!"):
     while True:
         try:
@@ -60,6 +68,7 @@ def input_of_str_options(prompt:str, ls_options:list, errormsg = "Input Tidak Va
             print(er)
     return ans.lower()
 
+# Subprogram untuk meminta input dengan syarat list bilangan bulat
 def input_of_int_options(prompt:str, ls_options:list, errormsg = "Input Tidak Valid!"):
     while True:
         try:
@@ -72,6 +81,7 @@ def input_of_int_options(prompt:str, ls_options:list, errormsg = "Input Tidak Va
             print(errormsg, f"\nmasukkan opsi yang valid: {ls_options}")
     return ans
 
+# Subprogram untuk meminta input dengan syarat jawaban "y" atau "t"
 def input_of_yatidak(prompt:str, errormsg= "Input Tidak Valid!"):
     while True:
         try:
@@ -82,6 +92,7 @@ def input_of_yatidak(prompt:str, errormsg= "Input Tidak Valid!"):
             print(er)
     return ans.lower()
 
+# Subprogram untuk meminta input uang normal
 def input_money(prompt:str):
     while True:
         try:
@@ -94,6 +105,7 @@ def input_money(prompt:str):
             print("Masukkan uang dengan benar")
     return amount
 
+# Subprogram untuk meminta input uang bersyarat nilai
 def input_money_w_params(prompt:str, code:int, moneyparam:int):
     counter = 0
     while True:
@@ -111,6 +123,7 @@ def input_money_w_params(prompt:str, code:int, moneyparam:int):
             print(er)
     return amount
 
+# Subprogram untuk mengganti warna dan gaya font pada terminal
 def ch_color_style(value, color:str="", style:str=""):
     color, style = color.lower(), style.lower()
     fmt = {"reset" : "\033[0m",
@@ -132,5 +145,6 @@ def ch_color_style(value, color:str="", style:str=""):
     }
     return f"{fmt[style]}{fmt[color]}{value}{fmt['reset']}"
 
+# Subprogram untuk menampilkan tabel dengan gaya tertentu
 def display_table(values:list, header:list, header_cond:bool= True):
-    print(tabulate(values, headers= header if header_cond == True else False, tablefmt="rst", stralign= "center"))
+    print(tabulate(values, headers= header if header_cond == True else False, tablefmt="rst", stralign= "right"))
