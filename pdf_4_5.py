@@ -62,6 +62,8 @@ def buat_pdf_4_5():
         # plt.show()
         plt.savefig(file+'.pdf')
 
+        plt.close(fig)
+
     # Pembuatan pie chart untuk distribusi pemasukan
     create_chart(4, label1, sizes1, "pdf_4", "Distribusi pemasukan dalam 30 hari terakhir")
     # Pembuatan pie chart untuk distribusi pengeluaran

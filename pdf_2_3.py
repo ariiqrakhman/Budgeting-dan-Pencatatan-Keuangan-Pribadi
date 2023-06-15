@@ -73,6 +73,8 @@ def buat_pdf_2_3():
 
         plt.savefig(f'pdf_{fig}.png', dpi=500)
 
+        plt.close(fig)
+
         c = canvas.Canvas(pdf_file)
         c.setPageSize((800, 600))
         c.drawImage(f'pdf_{fig}.png', 60, 60, width=700, height=500)
