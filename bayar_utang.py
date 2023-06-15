@@ -46,6 +46,9 @@ def bayar_utang():
             while True:
                 try: 
                     dibayar = sdl.input_money_w_params("Masukkan nominal bayar utang? ",0, nominaldompet)
+                    if dibayar == None:
+                        print(sdl.ch_color_style("Uang tidak cukup, dikembalikan ke menu utama","yellow"))
+                        return # Ketika nominal membayar utang gagal didapatkan
                     assert nominal_utang - dibayar >= 0, f"Nominal bayar terlalu banyak, maksimal {nominal_utang}"
                     break
                 except AssertionError as er:

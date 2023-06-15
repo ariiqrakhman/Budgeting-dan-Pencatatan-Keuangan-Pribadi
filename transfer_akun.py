@@ -19,6 +19,9 @@ def transfer_akun():
     dompet_1, nominal_1 = ls_dompet[lbl_1-1][0], int(ls_dompet[lbl_1-1][1]) # Ambil dompet 1
 
     nominal_tf = sdl.input_money_w_params(f"Masukkan jumlah uang ditransfer ",0, nominal_1)
+    if nominal_tf == None:
+        print(sdl.ch_color_style("Uang tidak cukup, dikembalikan ke menu utama","yellow"))
+        return # Ketika nominal pengeluaran gagal didapatkan
 
     opsi.remove(lbl_1) # Hapus pilihan dompet satu untuk persiapan input dompet kedua
     lbl_2 = sdl.input_of_int_options(f"Input 1-{byk_dompet} untuk memilih dompet penerima transfer ", opsi, f"Pilih dompet yang ada kecuali dompet {dompet_1}!")

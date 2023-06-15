@@ -47,14 +47,11 @@ def main():
         if pilih_menu != 0:
             system("cls")
             menu[pilih_menu-1][2]()
-            _ = sdl.input_normal(sdl.ch_color_style("Tekan Enter untuk kembali ke menu utama", "yellow"))
+            _ = input(sdl.ch_color_style("Tekan Enter untuk kembali ke menu utama", "yellow"))
             print("Proses kembali ke menu utama")
-            print("Silakan tunggu.\r")
-            sleep(.75)
-            print("Silakan tunggu..\r")
-            sleep(.75)
-            print("Silakan tunggu...\r")
-            sleep(.75)
+            for i in range(1,4):
+                print("Silakan tunggu"+("."*i), end= "\r")
+                sleep(.75)
 
         else:
             konfir_keluar = sdl.input_of_yatidak("Anda yakin mau keluar? (y/t) ")
