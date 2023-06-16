@@ -1,4 +1,4 @@
-import submodules as sdl
+from . import submodules as sdl
 from datetime import date, timedelta
 
 def analisis_keuangan():
@@ -117,6 +117,9 @@ def analisis_keuangan():
         ls_ex[j].append(f"{by_in}%")
 
         ls_ex[j][1] = f"Rp{amount:>10,}"
+
+        if tipe == "bayar utang":
+            continue
         
         if by_in > prc:
             for i in range(len(ls_ex[j])):

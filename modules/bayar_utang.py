@@ -1,6 +1,6 @@
-import submodules as sdl
-from pilih_dompet import pilih_dompet
-from pemasukan_pengeluaran import rekap_pemasukan_pengeluaran
+from . import submodules as sdl
+from .pilih_dompet import pilih_dompet
+from .pemasukan_pengeluaran import rekap_pemasukan_pengeluaran
 
 def bayar_utang():
     # Identitas subprogram
