@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 from reportlab.pdfgen import canvas
 import datetime
-import submodules
+from . import submodules as sdl
 
 def buat_pdf_2_3():
     # dapatkan tanggal hari ini
@@ -16,7 +16,7 @@ def buat_pdf_2_3():
         date_list.append(date.strftime("%Y/%m/%d"))
 
     # Pembuatan nilai tren pemasukan-pengeluaran
-    _, ls_tr = submodules.open_read_csv("sejarah_transaksi.csv")
+    _, ls_tr = sdl.open_read_csv("sejarah_transaksi.csv")
     money_flow = []
     for date in (date_list):
         money_flow_on_date = 0
@@ -30,7 +30,7 @@ def buat_pdf_2_3():
         money_flow.append(money_flow_on_date)
     
     # Pembuatan nilai perubahan aset
-    _, ls_dp = submodules.open_read_csv("dompet.csv")
+    _, ls_dp = sdl.open_read_csv("dompet.csv")
     sum_dp = sum([int(ele[1]) for ele in ls_dp])
     asset_flow = []
     asset_on_date = 0
@@ -69,15 +69,15 @@ def buat_pdf_2_3():
         plt.ticklabel_format(style='plain', axis='y')
 
         # Pembuatan file pdf 
-        pdf_file = f'pdf_{fig}.pdf'
+        pdf_file = f'report/pdf_{fig}.pdf'
 
-        plt.savefig(f'pdf_{fig}.png', dpi=500)
+        plt.savefig(f'report/pdf_{fig}.png', dpi=500)
 
         plt.close(fig)
 
         c = canvas.Canvas(pdf_file)
         c.setPageSize((800, 600))
-        c.drawImage(f'pdf_{fig}.png', 60, 60, width=700, height=500)
+        c.drawImage(f'report/pdf_{fig}.png', 60, 60, width=700, height=500)
         c.save()
     
     # Pembuatan grafik tren pemasukan-pengeluaran

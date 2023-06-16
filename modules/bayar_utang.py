@@ -47,7 +47,7 @@ def bayar_utang():
                 try: 
                     dibayar = sdl.input_money_w_params("Masukkan nominal bayar utang? ",0, nominaldompet)
                     if dibayar == None:
-                        print(sdl.ch_color_style("Uang tidak cukup, dikembalikan ke menu utama","yellow"))
+                        print(sdl.ch_color_style("Uang tidak cukup, dialihkan kembali ke menu utama","yellow"))
                         return # Ketika nominal membayar utang gagal didapatkan
                     assert nominal_utang - dibayar >= 0, f"Nominal bayar terlalu banyak, maksimal {nominal_utang}"
                     break
@@ -66,7 +66,8 @@ dibayar = {sdl.ch_color_style(dibayar_dis,"red")} dengan dompet {sdl.ch_color_st
             konfir_bayar = sdl.input_of_yatidak("Apakah mau membayar utang? (y/t) ")
             if konfir_bayar == "y":
                 break
-            # Apabila tidak konfir, kembali mengulang while loop
+            elif konfir_bayar == "t":
+                return # Apabila tidak konfir, keluar dari program
         
         # Pengurangan utang
         ls_utang[utang_bayar-1][1] = nominal_utang - dibayar

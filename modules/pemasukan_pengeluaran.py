@@ -35,7 +35,7 @@ def pemasukan_pengeluaran():
         elif inputpp == 0 :
             nominal = sdl.input_money_w_params("Masukkan nominal pengeluaran :", 0, nominalawal)
             if nominal == None:
-                print(sdl.ch_color_style("Uang tidak cukup, dikembalikan ke menu utama","yellow"))
+                print(sdl.ch_color_style("Uang tidak cukup, dialihkan kembali ke menu utama\n","yellow"))
                 return # Ketika nominal pengeluaran gagal didapatkan
             clr = "red"
             tr = "pengeluaran"

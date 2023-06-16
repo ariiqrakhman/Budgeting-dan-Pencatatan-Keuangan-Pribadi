@@ -28,7 +28,7 @@ def buat_pdf_1():
             ls_iv.append([ id+1, ele[0], ele[3], ele[2], None, f"Rp{int(ele[4]):>10,}" ])
 
     # Pembuatan file pdf
-    output_file = "pdf_1.pdf"
+    output_file = "report/pdf_1.pdf"
     title_text = "Tabel sejarah transaksi 30 hari terakhir"
     doc = SimpleDocTemplate(output_file, pagesize=letter, orientation='portrait')
     elements = []

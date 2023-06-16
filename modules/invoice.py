@@ -1,6 +1,6 @@
 from . import submodules as sdl
 from datetime import date, timedelta
-from os import remove, getcwd
+from os import remove, getcwd, makedirs
 from os.path import join
 
 def invoice():
@@ -43,20 +43,33 @@ def invoice():
     # Tanya apakah akan membuat invoice pdf
     buat_pdf = sdl.input_of_yatidak("Apakah mau membuat pdf invoice? (y/t) ")
     if buat_pdf == "y":
-        from pdf_1 import buat_pdf_1 # Pemanggilan pembuat pdf tabel invoice
-        from pdf_2_3 import buat_pdf_2_3 # Pemanggilan pembuatan pdf grafik keuangan
-        from pdf_4_5 import buat_pdf_4_5 # Pemanggilan pembuatan pdf chart lingkaran
+        from .pdf_1 import buat_pdf_1 # Pemanggilan pembuat pdf tabel invoice
+        from .pdf_2_3 import buat_pdf_2_3 # Pemanggilan pembuatan pdf grafik keuangan
+        from .pdf_4_5 import buat_pdf_4_5 # Pemanggilan pembuatan pdf chart lingkaran
 
+        output_dir = 'report'
+
+        # Create output directory if it doesn't exist
+        makedirs(output_dir, exist_ok=True)
+
+
+        print("Melakukan pembuatan riwayat, silakan tunggu", end= "\r")
         buat_pdf_1()
+        print("Riwayat selesai dibuat                                ")
+        print("Melakukan pembuatan grafik, silakan tunggu", end= "\r")
         buat_pdf_2_3()
+        print("Grafik selesai dibuat                                  ")
+        print("Melakukan chart distribusi riwayat, silakan tunggu", end= "\r")
         buat_pdf_4_5()
+        print("Chart distribusi selesai dibuat, silakan tunggu")
 
         from PyPDF2 import PdfMerger # Mulai penggabungan pdf
 
         # Daftar file pdf
-        pdf_files = ['pdf_1.pdf', 'pdf_2.pdf', 'pdf_3.pdf', 'pdf_4.pdf', 'pdf_5.pdf']
+        pdf_files = ['report/pdf_1.pdf', 'report/pdf_2.pdf', 'report/pdf_3.pdf', 'report/pdf_4.pdf', 'report/pdf_5.pdf']
 
         # Mulai penggabungan pdf
+        print("Menggabungkan konten pdf, silakan tunggu")
         merger = PdfMerger()
 
         # Penggabungan pdf pada merger
@@ -64,21 +77,23 @@ def invoice():
             merger.append(file)
 
         # Deklarasi nama pdf gabungan
-        output_pdf = 'pdf_merge.pdf'
+        print("Membuat pdf, silakan tunggu")
+        tgl_ini = hari_ini.strftime("%Y-%m-%d")
+        output_pdf = f'Laporan Keuangan {tgl_ini}.pdf'
+        output_path = join(output_dir, output_pdf)
 
         # Tulis merger ke nama pdf gabungan
-        merger.write(output_pdf)
+        merger.write(output_path)
 
         # Tutup merger
         merger.close()
         
         # Hapus pdf lama
-        for ele in pdf_files + ["pdf_2.png", "pdf_3.png"]:
+        for ele in pdf_files + ["report/pdf_2.png", "report/pdf_3.png"]:
             remove(join(getcwd(),ele))
 
         # Buka file pdf (Ada kemungkinan tidak berhasil)
+        print("Membuka pdf")
         import webbrowser
-        pdf_file = 'pdf_merge.pdf'
-        webbrowser.open_new_tab(pdf_file)
-
-
+        webbrowser.open_new_tab(output_path)
+        print("PDF telah dibuat dan dibuka")

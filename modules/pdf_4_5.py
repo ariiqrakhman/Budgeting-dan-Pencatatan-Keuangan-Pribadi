@@ -1,10 +1,10 @@
 import matplotlib.pyplot as plt
-import submodules
+from . import submodules as sdl
 from datetime import date, timedelta
 
 def buat_pdf_4_5():
     # Pembacaan file sejarah_transaksi
-    _, ls_tr = submodules.open_read_csv("sejarah_transaksi.csv")
+    _, ls_tr = sdl.open_read_csv("sejarah_transaksi.csv")
 
     # Persiapan pembuatan x-y key-value untuk distribusi pendapatan
     dict_ty1 = {}
@@ -60,7 +60,7 @@ def buat_pdf_4_5():
         plt.title(nama)
 
         # plt.show()
-        plt.savefig(file+'.pdf')
+        plt.savefig("report/"+file+'.pdf')
 
         plt.close(fig)
 

@@ -6,6 +6,9 @@ def transfer_akun():
     hd_dompet, ls_dompet = sdl.open_read_csv("dompet.csv")
     byk_dompet = len(ls_dompet)
 
+    # Identitas Subprogram
+    print("\n"+" TRANSFER AKUN ".center(50,"=")+"\n")   
+
     if byk_dompet < 2:
         print("Setidaknya memiliki 2 dompet untuk melakukan transfer akun")
         return # Kembali karena banyak dompet tidak cukup
@@ -20,12 +23,14 @@ def transfer_akun():
 
     nominal_tf = sdl.input_money_w_params(f"Masukkan jumlah uang ditransfer ",0, nominal_1)
     if nominal_tf == None:
-        print(sdl.ch_color_style("Uang tidak cukup, dikembalikan ke menu utama","yellow"))
+        print(sdl.ch_color_style("Uang tidak cukup, dialihkan kembali ke menu utama","yellow"))
         return # Ketika nominal pengeluaran gagal didapatkan
 
     opsi.remove(lbl_1) # Hapus pilihan dompet satu untuk persiapan input dompet kedua
     lbl_2 = sdl.input_of_int_options(f"Input 1-{byk_dompet} untuk memilih dompet penerima transfer ", opsi, f"Pilih dompet yang ada kecuali dompet {dompet_1}!")
     dompet_2, nominal_2 = ls_dompet[lbl_2-1][0], int(ls_dompet[lbl_2-1][1]) # ambil dompet 2
+
+    nominal_1 -= nominal_tf # Pengurangan nominal 1 untuk prepasi pengurangan dompet
 
     adm = sdl.input_money("Masukkan biaya admin, input 0 jika tidak ada")
 
@@ -38,12 +43,12 @@ def transfer_akun():
         while True:
             try:
                 if count >= 3:
-                    print(sdl.ch_color_style("Uang tidak cukup, kembali ke menu utama","yellow"))
+                    print(sdl.ch_color_style("Uang tidak cukup, dialihkan kembali ke menu utama","yellow"))
                     return # Ketika tidak didapatkan siapa dompet kena admin
                 kena_adm = sdl.input_of_int_options("Dompet mana yang terkena admin? ", [1,2])
                 count += 1
-                assert nominal_1 - nominal_tf - adm >= 0 if kena_adm == 1 \
-                    else nominal_2 - nominal_tf - adm >= 0, "Uang tidak cukup!"
+                assert nominal_1  - adm >= 0 if kena_adm == 1 else nominal_2  - adm >= 0 if kena_adm == 2 else True, "Uang tidak cukup!"
+                break
             except AssertionError as er:
                 print(er)
     else:
