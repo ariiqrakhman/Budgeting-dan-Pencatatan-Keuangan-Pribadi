@@ -1,4 +1,4 @@
-from . import submodules as sdl
+import submodules as sdl
 
 hd_dp, _ = sdl.open_read_csv("dompet.csv")
 hd_tr, _ = sdl.open_read_csv("sejarah_transaksi.csv")
