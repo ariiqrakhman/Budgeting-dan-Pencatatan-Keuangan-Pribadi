@@ -4,10 +4,12 @@ def buat_tipe(code:int):
     # Konfirmasi tipe yang dipilih sebelumnya
     if code == 1:
         tp = "Pemasukan"
+        _, ls_tp = sdl.open_read_csv("tipe_pemasukan.csv")
     else:
         tp = "Pengeluaran"
+        _, ls_tp = sdl.open_read_csv("tipe_pengeluaran.csv")
     # Buat tipe baru apabila input 0
-    nama = sdl.input_normal(f"Masukkan nama tipe {tp}")
+    nama = sdl.input_normal(f"Masukkan nama tipe {tp}", [ele[0].lower() for ele in ls_tp])
 
     # Konfirmasi tipe baru
     print(f'''Konfirmasi pembuatan tipe {tp}

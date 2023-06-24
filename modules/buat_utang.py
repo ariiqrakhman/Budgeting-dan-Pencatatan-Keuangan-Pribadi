@@ -19,9 +19,12 @@ def buat_utang():
 
         # pilih dompet untuk mencatat utang
         dompet, nominal_dompet = pilih_dompet()
+
+        # Pembacaan daftar utang yang ada
+        _, ls_ut = sdl.open_read_csv("utang.csv")
         
         # meminta pengguna memasukkan nama utang
-        nama_utang = sdl.input_normal("Masukkan nama utang: ")
+        nama_utang = sdl.input_normal("Masukkan nama utang: ", [ele[0].lower() for ele in ls_ut])
 
         # meminta pengguna memasukkan nominal utang
         nominal_utang = sdl.input_money("Masukkan nominal utang: ")

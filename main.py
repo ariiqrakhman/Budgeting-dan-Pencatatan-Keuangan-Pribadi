@@ -48,9 +48,9 @@ def main():
             system("cls")
             menu[pilih_menu-1][2]()
             _ = input(sdl.ch_color_style("Tekan Enter untuk kembali ke menu utama", "yellow"))
-            print("Proses kembali ke menu utama")
+            print(sdl.ch_color_style("Proses kembali ke menu utama", "tosca"))
             for i in range(1,4):
-                print("Silakan tunggu"+("."*i), end= "\r")
+                print(sdl.ch_color_style("Silakan tunggu"+("."*i), "tosca"), end= "\r")
                 sleep(.75)
 
         else:

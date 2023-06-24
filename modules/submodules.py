@@ -48,16 +48,17 @@ def sort_csv_by_hd(filename, sortby:str, reverse_cond:bool = False):
     open_write_all_csv(filename, content, header)
 
 # Subprogram untuk meminta input tanpa syarat
-def input_normal(prompt:str):
+def input_normal(prompt:str, ls_vl:list):
     while True:
         try:
             ans = input(prompt+"\n")
             assert len(ans) > 0, "Input tidak boleh kosong!"
             assert len(ans) <= 22, "Input terlalu panjang!"
+            assert ans.lower() not in ls_vl, "Nama sudah ada!"
             break
         except AssertionError as er:
             print(er)
-    return ans.lower()
+    return ans
 
 # Subprogram untuk meminta input dengan syarat list berisi string
 def input_of_str_options(prompt:str, ls_options:list, errormsg = "Input Tidak Valid!"):
@@ -100,6 +101,7 @@ def input_money(prompt:str):
         try:
             amount = int(input(prompt+"\n"))
             assert amount >= 0, "Uang tidak negatif!"
+            assert amount % 100 == 0, "Uang harus dalam kelipatan 100 rupiah!"
             assert amount < 10_000_000, "Uang terlalu besar!"
             break
         except AssertionError as er:
@@ -117,6 +119,7 @@ def input_money_w_params(prompt:str, code:int, moneyparam:int):
                 return None
             amount = int(input(prompt+"\n"))
             assert amount >= 0, "Uang tidak negatif!"
+            assert amount % 100 == 0, "Uang harus dalam kelipatan 100 rupiah!"
             assert amount < 10_000_000, "Uang terlalu besar!"
             counter += 1
             assert moneyparam - amount >= 0 if code == 0 else True, "Uang tidak cukup!"

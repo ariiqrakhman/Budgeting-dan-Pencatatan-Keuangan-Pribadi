@@ -1,0 +1,4 @@
+Daftar Revisi dan Perbaikan Program "Budgeting dan Pencatatan Pribadi":
+1. Memperbaiki input uang dengan limitasi 100 atau kelipatan untuk mengakomodasi uang fisik rupiah paling kecil yaitu 100 rupiah.
+2. Memperbaiki input memasukkan nama baru untuk dompet, utang, dan tipe agar tidak sama dengan nama yang sudah ada.
+3. Kustomisasi warna dan gaya font pada main

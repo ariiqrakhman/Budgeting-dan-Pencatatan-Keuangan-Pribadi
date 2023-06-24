@@ -35,7 +35,7 @@ def pilih_dompet():
         
         # Apabila input 0 (buat),
         # Masukkan nama dompet
-        nama = sdl.input_normal("Masukkan nama dompet : ")
+        nama = sdl.input_normal("Masukkan nama dompet : ", [ ele[0].lower() for ele in ls_dompet ])
         
         print(f'''Konfirmasi pembuatan dompet:
 Nama dompet  = {sdl.ch_color_style(nama,"sky")}''')
